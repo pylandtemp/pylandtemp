@@ -87,7 +87,7 @@ def compute_LSE_NBEM(NDVI, red_band) :
     #reference : https://www.mdpi.com/2072-4292/6/10/9829
     #NDVI : NDVI image
     #Red_band: Red band of image (0.63-0.69 micrometers)
-    
+
     assert NDVI.shape == red_band.shape , "Input images (NDVI and Red band) must be equal"
     
     emiss_matrix_10 = np.zeros(NDVI.shape) #Emissivity matrix for band 10 landsat 8 data (applies also to LST bands in other landsat data)
@@ -159,7 +159,7 @@ def compute_LST_mono_window(TB_band10, emissivity):
     return land_surface_temp
 
 
-# FOURTH ACTION: Obtain geotiff image of landsurface temperature
+#STEP 4: Obtain geotiff image of land surface temperature
 
 def array2raster(newRasterfn, dataset, array, dtype):
     """
