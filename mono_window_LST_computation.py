@@ -3,6 +3,8 @@ from osgeo import gdal
 from osgeo import osr
 import numpy as np
 
+#Apply code in this sequence
+# FIRST ACTION --> SECOND ACTION --> THIRD ACTION --> FOURTH ACTION
 
 #FISRT ACTION
 #Convert Landsat data digital number to TA brightness temperature
@@ -146,6 +148,7 @@ def compute_LSE_using_fvc(NDVI):
    
     return emiss_matrix_10
 
+#3RD ACTION
 #MAIN LST ALGORITHM (This function takes the TOA brightness temperature and emissivity images as imput to comput LST)
 def compute_LST_mono_window(TB_band10, emissivity):
     #REFERENCE: 
