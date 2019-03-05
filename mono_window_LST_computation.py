@@ -13,12 +13,12 @@ import numpy as np
 def DN_to_BrightnessTemp(image, M , A , mask, k1, k2):
     # Reference :  https://landsat.usgs.gov/using-usgs-landsat-8-product
     # image = Level 1 quantized and calibrated scaled Digital Numbers (DN) TIR band data (e.g Band 10 landsat 8 data)
-    # M = Band-specific multiplicative rescaling factor from the metadata (RADIANCE_MULT_BAND_x, where x is the band number).
-    # A = Band-specific additive rescaling factor from the metadata (RADIANCE_ADD_BAND_x, where x is the band number).
+    # M = Band-specific multiplicative rescaling factor from the image folder metadata (RADIANCE_MULT_BAND_x, where x is the band number).
+    # A = Band-specific additive rescaling factor from the image folder metadata (RADIANCE_ADD_BAND_x, where x is the band number).
     # mask = bitmap to define bound computation.
     # Image = Input landsat Level-1 data product
-    # k1 = Band-specific thermal conversion constant from the metadata (K1_CONSTANT_BAND_x, where x is the thermal band number)
-    # k2 = Band-specific thermal conversion constant from the metadata (K2_CONSTANT_BAND_x, where x is the thermal band number
+    # k1 = Band-specific thermal conversion constant from the image folder metadata (K1_CONSTANT_BAND_x, where x is the thermal band number)
+    # k2 = Band-specific thermal conversion constant from the image folder metadata (K2_CONSTANT_BAND_x, where x is the thermal band number
     
     assert image.shape == mask.shape , "Image and mask should be of the same size"
 
@@ -42,7 +42,7 @@ def DN_to_BrightnessTemp(image, M , A , mask, k1, k2):
 #This repo focuses on the NDVI based approaches. You only have to apply one of the functions defined below to obtain your LSE.
 
 #Method 1 (RECOMMENDED for mono-window technique)
-def emmissivity_NDVI_treshold_TIR10(NDVI, mask):
+def emmissivity_NDVI_threshold_TIR10(NDVI, mask):
     emissivity = np.zeros(NDVI.shape)
     # Reference:
     assert NDVI.shape == mask.shape,"Image and mask should be of the same size"
@@ -86,7 +86,8 @@ def compute_LSE_NBEM(NDVI, red_band) :
     #Reference: https://www.sciencedirect.com/science/article/pii/S0169204618306480#b0240
     #reference : https://www.mdpi.com/2072-4292/6/10/9829
     #NDVI : NDVI image
-
+    #Red_band: Red band of image (0.63-0.69 micrometers)
+    
     assert NDVI.shape == red_band.shape , "Input images (NDVI and Red band) must be equal"
     
     emiss_matrix_10 = np.zeros(NDVI.shape) #Emissivity matrix for band 10 landsat 8 data (applies also to LST bands in other landsat data)
