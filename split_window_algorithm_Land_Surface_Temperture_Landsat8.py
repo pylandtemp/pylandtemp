@@ -3,6 +3,8 @@ from osgeo import gdal
 from osgeo import osr
 import math
 
+#Contact: mudeledimeji@gmail.com
+
 #STEP 1: Convert landsat 8 bands 10 and 11 (Level 1 quantized and calibrated scaled Digital Numbers (DN) TIR band data) to TOA brightness temperature
 def DN_to_BrightnessTemp(image, M , A , mask, k1, k2):
     # Reference :  https://landsat.usgs.gov/using-usgs-landsat-8-product

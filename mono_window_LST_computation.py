@@ -3,6 +3,8 @@ from osgeo import gdal
 from osgeo import osr
 import numpy as np
 
+#Contact: mudeledimeji@gmail.com
+
 #Apply code in this sequence
 # FIRST ACTION --> SECOND ACTION --> THIRD ACTION --> FOURTH ACTION
 
@@ -37,7 +39,7 @@ def DN_to_BrightnessTemp(image, M , A , mask, k1, k2):
         brightness_temp = (k2 / (np.log((k1 / TOA_radiance) + 1))) - 273.15
     return brightness_temp
 
-#SECOND ACTION
+#STEP 2: Obtain LSE
 #Obtain Land surface Emissivity (LSE). There are multiple ways found in the literature defining how this can be done.
 #This repo focuses on the NDVI based approaches. You only have to apply one of the functions defined below to obtain your LSE.
 
@@ -149,10 +151,9 @@ def compute_LSE_using_fvc(NDVI):
    
     return emiss_matrix_10
 
-#3RD ACTION
-#MAIN LST ALGORITHM (This function takes the TOA brightness temperature and emissivity images as imput to comput LST)
+#STEP 3: DERIVE LST WITH MONO-WINDOW ALGORITHM (This function takes the TOA brightness temperature and emissivity images as imput to comput LST)
 def compute_LST_mono_window(TB_band10, emissivity):
-    #REFERENCE: 
+    #REFERENCE: Avdan, Ugur, and Gordana Jovanovska. "Algorithm for automated mapping of land surface temperature using LANDSAT 8 satellite data." Journal of Sensors 2016 (2016).
     assert TB_band10.shape == emissivity.shape, "TOA Brightness Temperature and emissivity images must be of the same size"
     #Compute and Surface Temperature matrix
     land_surface_temp = TB_band10 / (1 + (((0.0000115 * TB_band10) / 14380) * np.log(emissivity)))
