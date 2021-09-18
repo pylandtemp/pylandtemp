@@ -84,9 +84,10 @@ def compute_ndvi(nir: np.ndarray, red: np.ndarray, eps=1e-15)-> np.ndarray:
     
     to_return = np.where(np.abs(ndvi)>1,np.nan, ndvi) 
     
-    mask_nir = generate_mask(nir_band)
-    mask_red = generate_mask(red_band)
+    mask_nir = generate_mask(nir)
+    mask_red = generate_mask(red)
     mask = np.logical_and(mask_nir, mask_red)
     i, j = np.where(~mask)
     to_return[i, j] = np.nan
+    
     return to_return
