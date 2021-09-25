@@ -68,8 +68,6 @@ class Emissivity:
         self.emissivity = np.zeros_like(ndvi) 
         self.nan_mask = np.isnan(ndvi) # mask for nan values 
 
-       
-
     def __call__(self):
 
         if self.red_band is not None:
@@ -145,7 +143,7 @@ class ComputeEmissivityNBEM(Emissivity):
         #NDVI : NDVI image
         #Red_band: Red band of image (0.63-0.69 micrometers)
 
-        
+
         assert self.red_band is not None, ValueError("Red band cannot be {} for this emissivity computation method".format(self.red_band))
 
         masks = self._get_land_surface_mask()
