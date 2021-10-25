@@ -82,7 +82,7 @@ def compute_ndvi(nir: np.ndarray, red: np.ndarray, eps=1e-15)-> np.ndarray:
     ndvi = np.empty(nir.shape)
     ndvi = (nir - red) / (nir + red + eps)
     
-    to_return = np.where(np.abs(ndvi)>1,np.nan, ndvi) 
+    to_return = np.where(np.abs(ndvi)>1, np.nan, ndvi) 
     
     mask_nir = generate_mask(nir)
     mask_red = generate_mask(red)
