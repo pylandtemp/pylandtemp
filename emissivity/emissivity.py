@@ -20,7 +20,7 @@ class Emissivity:
     def get_method(self, method):
 
         if method == 'avdan':
-            return MonoWindowEmissivity
+            return ComputeMonoWindowEmissivity
         elif method == 'xiaolei':
             return ComputeEmissivityNBEM
         elif method == 'gopinadh':
@@ -109,9 +109,10 @@ class EmissivityParent:
         
 
 
-class MonoWindowEmissivity(EmissivityParent):
+class ComputeMonoWindowEmissivity(EmissivityParent):
+    
     def __init__(self, ndvi, red_band=None):
-        super(MonoWindowEmissivity, self).__init__(ndvi, red_band)
+        super(ComputeMonoWindowEmissivity, self).__init__(ndvi, red_band)
         self.emissivity_soil = 0.97 
         self.emissivity_veg = 0.99
 
