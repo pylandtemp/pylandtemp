@@ -1,4 +1,8 @@
 
 
 *.ipynb
-/data
+./data
+
+*.TIF
+*.tif
+
