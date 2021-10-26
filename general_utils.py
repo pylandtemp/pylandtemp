@@ -1,12 +1,13 @@
 import numpy as np
 from typing import Optional, List
 
-
-
-
-
-
-def compute_brightness_temp(image: np.ndarray, M: float, A: float , k1: float, k2: float, unit: str='kelvin', mask: bool =True)-> np.ndarray:
+def compute_brightness_temp(image: np.ndarray, 
+                            M: float, 
+                            A: float , 
+                            k1: float, 
+                            k2: float, 
+                            unit: str='kelvin', 
+                            mask: bool =True)-> np.ndarray:
 
     """Converts image raw digital numbers to brightness temperature
         Reference :  https://landsat.usgs.gov/using-usgs-landsat-8-product
@@ -65,7 +66,9 @@ def generate_mask(image)-> np.ndarray:
     return mask_true
 
 
-def compute_ndvi(nir: np.ndarray, red: np.ndarray, eps=1e-15)-> np.ndarray:
+def compute_ndvi(nir: np.ndarray, 
+                red: np.ndarray, 
+                eps=1e-15)-> np.ndarray:
     """Takes the near infrared and red bands of an optical satellite image as input and returns the ndvi: normalized difference vegetation index
 
     Args:

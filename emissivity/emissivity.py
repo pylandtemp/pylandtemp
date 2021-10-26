@@ -33,12 +33,11 @@ class Emissivity:
 
 
     def _get_method(self, method):
-        
-        callable_ = self.methods.get(method)
-        if not callable_:
-            raise NotImplementedError("Requested method not implemented. Choose among available methods: {self.methods}")
 
-        return callable_
+        if method not in self.methods:
+            raise NotImplementedError("Requested method not implemented. Choose among available methods: {self.methods}")
+        
+        return self.methods.get(method)
 
         
 

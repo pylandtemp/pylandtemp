@@ -16,7 +16,7 @@ class LandsatBrightnessTemp:
                 unit: str='kelvin'
                 
             ):
-        """[Converts image raw digital numbers to brightness temperature]
+        """Converts image raw digital numbers to brightness temperature
 
         Args:
             mult_factor (float): Band-specific multiplicative rescaling factor from the image folder metadata (RADIANCE_MULT_BAND_x, where x is the band index).
@@ -27,7 +27,7 @@ class LandsatBrightnessTemp:
             
 
         Returns:
-            [np.ndarray]: [Brightness temperature corrected image]
+            np.ndarray: Brightness temperature corrected image.
         """
 
         self.mult_factor = mult_factor
