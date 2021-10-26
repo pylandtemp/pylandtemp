@@ -24,7 +24,7 @@ def compute_brightness_temperature(image: np.ndarray,
         k2 (float): Band-specific thermal conversion constant from the image 
                     folder metadata (K2_CONSTANT_BAND_x, where x is the thermal band number.
                     unit (str):  'kelvin' or 'celcius'
-        unit (str): 'kelvin' or 'celcius', the unit of the temperature to be computed.  \
+        unit (str): 'kelvin' or 'celcius', the unit of the temperature to be computed.  
         mask (bool): True if you want to mask NaN, O or irregular values from the computation
 
     Returns:
