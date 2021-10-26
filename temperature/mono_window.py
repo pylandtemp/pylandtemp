@@ -1,14 +1,8 @@
 
 import numpy as np
 
-from temperature.utils import  compute_brightness_temperature
-
-
-#! Take the brightness temperature variables as **kwargs to the class
-#! continue from here 
-
 class MonoWindow:
-    def __init__(self, compute_brightness_temp=True):
+    def __init__(self):
         """
         Method reference:
         Avdan, Ugur, and Gordana Jovanovska. "Algorithm for automated mapping of land surface 
@@ -20,17 +14,16 @@ class MonoWindow:
                                                         Defaults to True.
         """
 
-        self.compute_brightness_temp = compute_brightness_temp
 
-    def __call__(self):
-        pass 
+    def __call__(self, brightness_temperature, emmisivity):
+        return compute_lst_mono_window(brightness_temperature, emmisivity)
         
-    #STEP 3: DERIVE LST WITH MONO-WINDOW ALGORITHM (This function takes the TOA brightness temperature and emissivity images as imput to comput LST)
     def compute_lst_mono_window(temperature_band, emissivity):
         """[summary]
 
         Args:
-            temperature_band (np.ndarray): Landsat image temperature band. If landsat 8, it's Band 10.
+            temperature_band (np.ndarray): Landsat image temperature band (converted to brightness temperature). 
+                                            If landsat 8, it's Band 10.
             emissivity (np.ndarray): The emmisivity image derived from computing emissivity
 
         Returns:
@@ -46,4 +39,5 @@ class MonoWindow:
                             14380) * 
                             np.log(emissivity)))
         )
+
         return land_surface_temp
