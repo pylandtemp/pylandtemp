@@ -10,6 +10,9 @@ def generate_mask(image, mask_zeros=False)-> np.ndarray:
 
     Args:
         image (np.ndarray): Single-band image
+
+    return:
+        np.ndarray
     """
 
     
