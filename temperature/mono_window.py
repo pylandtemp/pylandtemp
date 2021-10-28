@@ -16,19 +16,26 @@ class MonoWindow:
 
 
     def __call__(self, brightness_temperature, emmisivity):
-        return compute_lst_mono_window(brightness_temperature, emmisivity)
-        
-    def compute_lst_mono_window(temperature_band, emissivity):
-        """[summary]
 
+        dict_input = dict()
+        dict_input['brightness_temperature_10'] = brightness_temperature
+        dict_input['emissivity'] = emissivity
+
+        return compute_lst_mono_window(bdict_input)
+        
+    def compute_lst_mono_window(dict_):
+        """[summary]
+        dict_ should contain the following arguments
         Args:
-            temperature_band (np.ndarray): Landsat image temperature band (converted to brightness temperature). 
-                                            If landsat 8, it's Band 10.
+            brightness_temperature_10 (np.ndarray): Landsat 8 image band 10  (converted to brightness temperature). 
             emissivity (np.ndarray): The emmisivity image derived from computing emissivity
 
         Returns:
             np.ndarray: Land surface temmperature
         """
+        temperature_band = dict_['brightness_temperature_10']
+        emissivity = dict_['emissivity']
+
         if temperature_band.shape != emissivity.shape:
             raise ValueError("Temperature image and emissivity images must be of the same size/shape")
 
