@@ -52,3 +52,18 @@ def compute_brightness_temperature(image: np.ndarray,
     if unit == 'celcius':
         brightness_temp = brightness_temp - 273.15
     return brightness_temp
+
+def get_lst_compute_fn_input(
+                            emissivity, 
+                            brightness_temperature_10, 
+                            brightness_temperature_11, 
+                            column_water_vapour
+                            ):
+    to_return = dict()
+
+    to_return['emissivity'] = emissivity
+    to_return['brightness_temperature_10'] = brightness_temperature_10
+    to_return['brightness_temperature_11'] = brightness_temperature_11
+    to_return['column_water_vapour'] = column_water_vapour
+
+    return to_return

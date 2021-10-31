@@ -15,20 +15,23 @@ class MonoWindow:
         """
 
 
-    def __call__(self, brightness_temperature, emmisivity):
+    #def __call__(self, brightness_temperature, emmisivity):
+    #   
+    #    dict_input = dict()
+    #    dict_input['brightness_temperature_10'] = brightness_temperature
+    #    dict_input['emissivity'] = emissivity
+    #
+    #    return compute_lst_mono_window(dict_input)
+    
+    def __call__(self, dict_):
+        return compute_lst_mono_window(dict_)
 
-        dict_input = dict()
-        dict_input['brightness_temperature_10'] = brightness_temperature
-        dict_input['emissivity'] = emissivity
-
-        return compute_lst_mono_window(bdict_input)
-        
     def compute_lst_mono_window(dict_):
         """[summary]
-        dict_ should contain the following arguments
-        Args:
-            brightness_temperature_10 (np.ndarray): Landsat 8 image band 10  (converted to brightness temperature). 
-            emissivity (np.ndarray): The emmisivity image derived from computing emissivity
+        dict_ should contain the following keys
+        dict_ keys:
+                brightness_temperature_10 (np.ndarray): Landsat 8 image band 10  (converted to brightness temperature). 
+                emissivity (np.ndarray): The emmisivity image derived from computing emissivity
 
         Returns:
             np.ndarray: Land surface temmperature

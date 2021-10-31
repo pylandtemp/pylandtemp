@@ -3,6 +3,9 @@
 #### Library development journey: TODO
 -
 - Complete the mono window module, and LST frontend to be able to use Mono-window for now.
+      - The main function will be 
+
+
 - Complete Column water vapour module class
 - Complete split window algorithms
 - Correct emissivity algorithm error (NBEM method)
