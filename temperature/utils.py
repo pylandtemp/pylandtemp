@@ -53,14 +53,25 @@ def compute_brightness_temperature(image: np.ndarray,
         brightness_temp = brightness_temp - 273.15
     return brightness_temp
 
+
 def get_lst_compute_fn_input(
                             emissivity, 
                             brightness_temperature_10, 
                             brightness_temperature_11, 
                             column_water_vapour
                             ):
-    to_return = dict()
+    """Returns a dictionary with all input to land surface temperature call methods
 
+    Args:
+        emissivity (np.ndarray(n x m)): Land surface emissivity image as a numpy array
+        brightness_temperature_10 (np.ndarray(n x m)): Land surface temperature band 10 image as a numpy array
+        brightness_temperature_11 (np.ndarray(n x m)): Land surface temperature band 11 image as a numpy array
+        column_water_vapour ([type]): [description]
+
+    Returns:
+        Dict: key: value mapping each input variable to corresponding name keys.
+    """
+    to_return = dict()
     to_return['emissivity'] = emissivity
     to_return['brightness_temperature_10'] = brightness_temperature_10
     to_return['brightness_temperature_11'] = brightness_temperature_11
