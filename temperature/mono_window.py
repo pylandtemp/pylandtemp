@@ -24,9 +24,9 @@ class MonoWindow:
     #    return compute_lst_mono_window(dict_input)
     
     def __call__(self, dict_):
-        return compute_lst_mono_window(dict_)
+        return self._compute_lst_mono_window(dict_)
 
-    def compute_lst_mono_window(dict_):
+    def _compute_lst_mono_window(self, dict_):
         """[summary]
         dict_ should contain the following keys
         dict_ keys:
@@ -45,9 +45,15 @@ class MonoWindow:
         land_surface_temp = (temperature_band / 
                             (1 + 
                             (((0.0000115 * 
-                            TB_temperature_bandband10) / 
+                            temperature_band) / 
                             14380) * 
                             np.log(emissivity)))
         )
 
+        nan_mask = np.isnan(emissivity)
+        land_surface_temp[nan_mask] = np.nan 
         return land_surface_temp
+
+        def generate_nan_mask(self, image)-> ndarray:
+            
+            return np.isnan(image) 

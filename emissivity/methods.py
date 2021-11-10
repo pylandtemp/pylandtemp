@@ -1,6 +1,81 @@
 import numpy as np
+from emissivity.utils import fractional_vegetation_cover
         
+class EmissivityParent:
+    def __init__(self, ndvi, red_band):
+        """ Parent class for all emissivity methods. Contains general methods and attributes
 
+        Args:
+            ndvi (np.ndarray[float]): Normalized difference vegetation index in matrix form
+
+        """
+        assert len(ndvi.shape) == 2, ValueError("Input must be single band image with two dimensions only. {}".format(ndvi.shape))
+        self.ndvi = ndvi #nvdi image
+        self.red_band = red_band
+        self.emissivity = np.zeros_like(ndvi) 
+        self.nan_mask = np.isnan(ndvi) # mask for nan values 
+
+    def __call__(self):
+
+        if self.red_band is not None:
+            assert self.ndvi.shape == self.red_band.shape , ValueError("Input images (NDVI and Red band) must be of equal dimension")
+
+        emm = self._compute_emissivity()
+
+        emm[self.nan_mask] = np.nan
+
+        return emm
+        
+        
+    def _get_land_surface_mask(self):
+        
+        mask_baresoil = (self.ndvi >= -1) & (self.ndvi < 0.2)
+        mask_vegetation = (self.ndvi > 0.5) & (self.ndvi <= 1)
+        mask_mixed = (self.ndvi >= 0.2) & (self.ndvi <= 0.5)
+
+        return {
+                'baresoil': mask_baresoil, 
+                'vegetation': mask_vegetation, 
+                'mixed': mask_mixed
+                }
+
+    def _compute_emissivity(self):
+        raise NotImplementedError("No emissivity computation logic implemented yet")
+    
+
+
+    def _compute_cavity_effect(self):
+        """Computes cavity effect from fractional vegetation cover matrix
+
+        Args:
+            frac_vegetation_cover (np.ndarray): Fractional vegetation cover matrix
+
+        Returns:
+            np.ndarray: Cavity effect matric
+        """
+        fractional_veg_cover = self._compute_fvc()
+        return  cavity_effect(fractional_veg_cover)
+
+    def _get_landcover_mask_indices(self):
+        """Returns indices corresponding to the different landcover classes of of interest namely:
+            vegetation, baresoil and mixed"
+
+        Args:
+            landcover ([type]): [description]
+        """
+
+        masks = self._get_land_surface_mask()
+
+        # Baresoil value assignment
+        baresoil = np.where(masks['baresoil'])
+        vegetation = np.where(masks['vegetation'])
+        mixed = np.where(masks['mixed'])
+
+        return {'baresoil': baresoil, 'vegetation': vegetation, 'mixed': mixed}
+
+    def _compute_fvc(self):
+    #    raise NotImplementedError("Fractional vegetation cover computation not implemented yet, or not applied")
+        return fractional_vegetation_cover(self.ndvi)
 
 class ComputeMonoWindowEmissivity(EmissivityParent):
     
@@ -127,78 +202,3 @@ class ComputeEmissivityGopinadh(EmissivityParent):
 
 
 
-class EmissivityParent:
-    def __init__(self, ndvi, red_band):
-        """ Parent class for all emissivity methods. Contains general methods and attributes
-
-        Args:
-            ndvi (np.ndarray[float]): Normalized difference vegetation index in matrix form
-
-        """
-        assert len(ndvi.shape) == 2, ValueError("Input must be single band image with two dimensions only. {}".format(ndvi.shape))
-        self.ndvi = ndvi #nvdi image
-        self.red_band = red_band
-        self.emissivity = np.zeros_like(ndvi) 
-        self.nan_mask = np.isnan(ndvi) # mask for nan values 
-
-    def __call__(self):
-
-        if self.red_band is not None:
-            assert self.ndvi.shape == self.red_band.shape , ValueError("Input images (NDVI and Red band) must be of equal dimension")
-
-        emm = self._compute_emissivity()
-
-        emm[self.nan_mask] = np.nan
-
-        return emm
-        
-        
-    def _get_land_surface_mask(self):
-        
-        mask_baresoil = (self.ndvi >= -1) & (self.ndvi < 0.2)
-        mask_vegetation = (self.ndvi > 0.5) & (self.ndvi <= 1)
-        mask_mixed = (self.ndvi >= 0.2) & (self.ndvi <= 0.5)
-
-        return {
-                'baresoil': mask_baresoil, 
-                'vegetation': mask_vegetation, 
-                'mixed': mask_mixed
-                }
-
-    def _compute_emissivity(self):
-        raise NotImplementedError("No emissivity computation logic implemented yet")
-    
-
-
-    def _compute_cavity_effect(self):
-        """Computes cavity effect from fractional vegetation cover matrix
-
-        Args:
-            frac_vegetation_cover (np.ndarray): Fractional vegetation cover matrix
-
-        Returns:
-            np.ndarray: Cavity effect matric
-        """
-        fractional_veg_cover = self._compute_fvc()
-        return  cavity_effect(fractional_veg_cover)
-
-    def _get_landcover_mask_indices(self):
-        """Returns indices corresponding to the different landcover classes of of interest namely:
-            vegetation, baresoil and mixed"
-
-        Args:
-            landcover ([type]): [description]
-        """
-
-        masks = self._get_land_surface_mask()
-
-        # Baresoil value assignment
-        baresoil = np.where(masks['baresoil'])
-        vegetation = np.where(masks['vegetation'])
-        mixed = np.where(masks['mixed'])
-
-        return {'baresoil': baresoil, 'vegetation': vegetation, 'mixed': mixed}
-
-    def _compute_fvc(self):
-    #    raise NotImplementedError("Fractional vegetation cover computation not implemented yet, or not applied")
-        return fractional_vegetation_cover(self.ndvi)

@@ -1,4 +1,4 @@
-from mono_window import MonoWindow
+from temperature.mono_window import MonoWindow
 from emissivity.emissivity import Emissivity
 from temperature.utils import get_lst_compute_fn_input
 
@@ -14,7 +14,7 @@ class LST:
 
     def __call__(self, emissivity, brightness_temperature_10, brightness_temperature_11=None, column_water_vapour=None):
 
-        lst_method_fn = get_method(self.method)
+        lst_method_fn = self._get_methods(self.method)
 
         dict_input = get_lst_compute_fn_input(
                                             emissivity, 
@@ -22,10 +22,12 @@ class LST:
                                             brightness_temperature_11, 
                                             column_water_vapour
                                             )
+        # mask for nan values 
+
         return lst_method_fn()(dict_input)
 
     def _get_methods(self, method):
-        if method not in self.methods:
+        if method not in self.lst_methods:
             raise NotImplementedError("Requested method not implemented. Choose among available methods: {self.methods}")
         return self.lst_methods[method]
 

@@ -1,12 +1,12 @@
 
 import numpy as np
-from utils import compute_brightness_temp
+from temperature.utils import compute_brightness_temperature
 from typing import List, Optional 
 import numpy.ma as ma
 
 
 
-class LandsatBrightnessTemperature:
+class BrightnessTemperature:
     def __init__(
                 self, 
                 mult_factor: float, 
@@ -40,6 +40,9 @@ class LandsatBrightnessTemperature:
         self.k2_constant = k2_constant
         self.unit = unit
     
+    def transform(self, image: np.ndarray, mask=None) -> np.ndarray:
+            return self.__call__(image, mask)
+
     def __call__(self, image: np.ndarray, mask=None)->np.ndarray: #: Optional[np.ndarray]=None)
         """
         image (np.ndarray): Level 1 quantized and calibrated scaled Digital Numbers (DN) TIR band data (e.g Band 10 landsat 8 data)
@@ -50,4 +53,4 @@ class LandsatBrightnessTemperature:
     
     def _compute_brightness_temp(self, image: np.ndarray, mask: bool=True):
 
-        return compute_brightness_temp(image, self.mult_factor, self.add_factor, self.k1_constant, self.k2_constant, unit=self.unit, mask=mask)
+        return compute_brightness_temperature(image, self.mult_factor, self.add_factor, self.k1_constant, self.k2_constant, unit=self.unit, mask=mask)
