@@ -1,5 +1,4 @@
-from temperature.mono_window import MonoWindow
-from emissivity.emissivity import Emissivity
+from temperature.methods.mono_window import MonoWindow
 from temperature.utils import get_lst_compute_fn_input
 
 LST_METHODS = {'mono_window': MonoWindow}

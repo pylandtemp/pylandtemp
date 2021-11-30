@@ -13,15 +13,6 @@ class MonoWindow:
                                                         band to TOA brightness temperature equivaent. 
                                                         Defaults to True.
         """
-
-
-    #def __call__(self, brightness_temperature, emmisivity):
-    #   
-    #    dict_input = dict()
-    #    dict_input['brightness_temperature_10'] = brightness_temperature
-    #    dict_input['emissivity'] = emissivity
-    #
-    #    return compute_lst_mono_window(dict_input)
     
     def __call__(self, dict_):
         return self._compute_lst_mono_window(dict_)

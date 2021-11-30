@@ -61,7 +61,7 @@ def generate_mask(image)-> np.ndarray:
     Return a bool array masking 0 and NaN values as False and others as True
 
     Args:
-        image (np.ndarray): Single-band image
+        image (np.ndarray): Single-band image which is True where we do not want to mask and False where we want to mask
     """
 
     zero_mask = image != 0 #or image != np.nan
@@ -73,29 +73,32 @@ def generate_mask(image)-> np.ndarray:
 
 def compute_ndvi(nir: np.ndarray, 
                 red: np.ndarray, 
-                eps=1e-15)-> np.ndarray:
+                eps=1e-15,
+                use_mask= True)-> np.ndarray:
     """Takes the near infrared and red bands of an optical satellite image as input and returns the ndvi: normalized difference vegetation index
 
     Args:
         nir (np.ndarray): [Near-infrared band image]
         red (np.ndarray): [Red band image]
         eps (float): Epsilon to avoid ZeroDivisionError in numpy
+        use_mask (bool): If True, mask NaN and 0 values in input images. 
 
     Returns:
         np.ndarray: [Normalized difference vegetation index]
     """
     
-    assert nir.shape == red.shape, f"Both images must be of the same dimaension, {nir.shape}, {red.shape}"
+    assert nir.shape == red.shape, f"Both images must be of the same dimension, {nir.shape}, {red.shape}"
     
     ndvi = np.empty(nir.shape)
     ndvi = (nir - red) / (nir + red + eps)
     
     to_return = np.where(np.abs(ndvi)>1, np.nan, ndvi) 
     
-    mask_nir = generate_mask(nir)
-    mask_red = generate_mask(red)
-    mask = np.logical_and(mask_nir, mask_red)
-    i, j = np.where(~mask)
-    to_return[i, j] = np.nan
-    
+    if use_mask:
+        mask_nir = generate_mask(nir)
+        mask_red = generate_mask(red)
+        mask = np.logical_and(mask_nir, mask_red)
+        i, j = np.where(~mask)
+        to_return[i, j] = np.nan
+        
     return to_return
