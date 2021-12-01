@@ -1,35 +1,38 @@
 import numpy as np
-from emissivity.utils import EmissivityParent        
+from emissivity.utils import EmissivityParent   
+from general_utils import cavity_effect     
 
 
 class ComputeMonoWindowEmissivity(EmissivityParent):
     
-    def __init__(self, ndvi, red_band=None, mask=None):
-        super(ComputeMonoWindowEmissivity, self).__init__(ndvi, red_band, mask)
-        self.emissivity_soil = 0.97 
-        self.emissivity_veg = 0.99
-
+    def __init__(self, ndvi, red_band=None):
+        super(ComputeMonoWindowEmissivity, self).__init__(ndvi, red_band)
+        self.emissivity_soil_10 = 0.97 
+        self.emissivity_veg_10 = 0.99
+        self.emissivity_soil_11 = None
+        self.emissivity_veg_11 = None
     def _compute_emissivity(self):
 
-        
+        emm = np.empty_like(self.ndvi)
+
         landcover_mask_indices = self._get_landcover_mask_indices()
 
         # Baresoil value assignment
-        self.emissivity[landcover_mask_indices['baresoil']] = self.emissivity_soil
+        emm[landcover_mask_indices['baresoil']] = self.emissivity_soil_10
 
         # Vegetation value assignment
-        self.emissivity[landcover_mask_indices['vegetation']] = self.emissivity_veg
+        emm[landcover_mask_indices['vegetation']] = self.emissivity_veg_10
 
         # Mixed value assignment
-        self.emissivity[landcover_mask_indices['mixed']] = ((0.004 *
-                                                            (((self.ndvi[landcover_mask_indices['mixed']] - 
-                                                            0.2)/(0.5 - 0.2))**2)) +
-                                                            0.986
+        emm[landcover_mask_indices['mixed']] = ((0.004 *
+                                                (((self.ndvi[landcover_mask_indices['mixed']] - 
+                                                0.2)/(0.5 - 0.2))**2)) +
+                                                0.986
         )
 
-        self.emissivity[self.nan_mask] = np.nan
+        #self.emissivity[self.nan_mask] = np.nan
 
-        return self.emissivity
+        return emm, emm
 
  
     
@@ -37,7 +40,7 @@ class ComputeMonoWindowEmissivity(EmissivityParent):
 class ComputeEmissivityNBEM(EmissivityParent):
 
 
-    def __init__(self, ndvi, red_band, mask=None):
+    def __init__(self, ndvi, red_band):
         """
         Method references:
 
@@ -54,9 +57,11 @@ class ComputeEmissivityNBEM(EmissivityParent):
             ndvi (np.ndarray[float]): Normalized difference vegetation index (NDVI) image matrix
             red_band (np.ndarray[float]): Red band of image (0.63-0.69 micrometers)
         """
-        super(ComputeEmissivityNBEM, self).__init__(ndvi, red_band, mask)
-        self.emissivity_soil = 0.9668 
-        self.emissivity_veg = 0.9863
+        super(ComputeEmissivityNBEM, self).__init__(ndvi, red_band)
+        self.emissivity_soil_10 = 0.9668 
+        self.emissivity_veg_10 = 0.9863
+        self.emissivity_soil_11 = 0.9747 
+        self.emissivity_veg_11 = 0.9896
 
 
     
@@ -69,34 +74,57 @@ class ComputeEmissivityNBEM(EmissivityParent):
 
         fractional_veg_cover = self._compute_fvc()
 
-        cavity_effect_10 = self._compute_cavity_effect()    
+        def calc_emissivity_for_band(image, emissivity_veg, emissivity_soil, cavity_effect, red_band_coeff_a=None, red_band_coeff_b=None):
+            image[landcover_mask_indices['baresoil']] = (red_band_coeff_a -
+                                                        (red_band_coeff_b * self.red_band[landcover_mask_indices['baresoil']])
 
-        self.emissivity[landcover_mask_indices['baresoil']] = (0.973 - 
-                                                                (0.047 * 
-                                                                self.red_band[landcover_mask_indices['baresoil']])
+            )
+
+            image[landcover_mask_indices['mixed']] = ((emissivity_veg * 
+                                                        fractional_veg_cover[landcover_mask_indices['mixed']]) + 
+                                                        (emissivity_soil *
+                                                        (1 - fractional_veg_cover[landcover_mask_indices['mixed']])) +
+                                                        cavity_effect[landcover_mask_indices['mixed']]
+            )
+
+            image[landcover_mask_indices['vegetation']] = (emissivity_veg + 
+                                                            cavity_effect[landcover_mask_indices['vegetation']]
+            )
+
+            return image 
+        
+        
+        emissivity_band_10 = np.empty_like(self.ndvi)
+        emissivity_band_11 = np.empty_like(self.ndvi)
+        frac_vegetation_cover = self._compute_fvc()
+
+        cavity_effect_10 = cavity_effect(self.emissivity_veg_10, self.emissivity_soil_10, fractional_veg_cover)
+        cavity_effect_11 = cavity_effect(self.emissivity_veg_11, self.emissivity_soil_11, fractional_veg_cover)
+
+        emissivity_band_10 = calc_emissivity_for_band(
+                                    emissivity_band_10, 
+                                    self.emissivity_veg_10, 
+                                    self.emissivity_soil_10, 
+                                    cavity_effect_10,
+                                    red_band_coeff_a=0.973,
+                                    red_band_coeff_b=0.047
+        )
+        emissivity_band_11 = calc_emissivity_for_band(
+                                emissivity_band_11, 
+                                self.emissivity_veg_11, 
+                                self.emissivity_soil_11, 
+                                cavity_effect_11,
+                                red_band_coeff_a=0.984,
+                                red_band_coeff_b=0.026
         )
 
-        self.emissivity[landcover_mask_indices['mixed']] = ((self.emissivity_veg * 
-                                                            fractional_veg_cover[landcover_mask_indices['mixed']]) + 
-                                                            (self.emissivity_soil *
-                                                            (1 - fractional_veg_cover[landcover_mask_indices['mixed']])) +
-                                                            cavity_effect_10[landcover_mask_indices['mixed']]
-        )
-
-        self.emissivity[landcover_mask_indices['vegetation']] = (self.emissivity_veg + 
-                                                                cavity_effect_10[landcover_mask_indices['vegetation']]
-        )
-
-        self.emissivity[self.nan_mask] = np.nan
-
-        return self.emissivity
-    
+        return emissivity_band_10, emissivity_band_11
     
     
 
 class ComputeEmissivityGopinadh(EmissivityParent):
 
-    def __init__(self, ndvi, red_band=None, mask=None):
+    def __init__(self, ndvi, red_band=None):
         """
         Method reference:
 
@@ -108,22 +136,30 @@ class ComputeEmissivityGopinadh(EmissivityParent):
             ndvi (np.ndarray[float]): Normalized difference vegetation index (NDVI) image matrix
             red_band (np.ndarray[float]): Red band of image (0.63-0.69 micrometers). Defaults to None.
         """
-        super(ComputeEmissivityGopinadh, self).__init__(ndvi, red_band, mask)
-        self.emissivity_soil = 0.9668
-        self.emissivity_veg = 0.9747
+        super(ComputeEmissivityGopinadh, self).__init__(ndvi, red_band)
+        self.emissivity_soil_10 = 0.971
+        self.emissivity_veg_10 = 0.987
+
+        self.emissivity_soil_11 = 0.977
+        self.emissivity_veg_11 = 0.989
     
     def _compute_emissivity(self):
     
         fractional_veg_cover = self._compute_fvc()
 
-        self.emissivity = ((self.emissivity_soil * 
-                            (1 - fractional_veg_cover)) + 
-                            (self.emissivity_veg * 
-                            fractional_veg_cover))
+        def calc_emissivity_for_band(image, emissivity_veg, emissivity_soil, fractional_veg_cover):
+            emm = ((emissivity_soil * 
+                    (1 - fractional_veg_cover)) + 
+                    (emissivity_veg * 
+                    fractional_veg_cover))
+            return emm 
 
-        self.emissivity[self.nan_mask] = np.nan
+        emissivity_band_10 = np.empty_like(self.ndvi)
+        emissivity_band_10 = calc_emissivity_for_band(emissivity_band_10, self.emissivity_veg_10, self.emissivity_soil_10, fractional_veg_cover)
 
-        return  self.emissivity
+        emissivity_band_11 = np.empty_like(self.ndvi)
+        emissivity_band_11 = calc_emissivity_for_band(emissivity_band_11, self.emissivity_veg_11, self.emissivity_soil_11, fractional_veg_cover)
+        return  emissivity_band_10, emissivity_band_11 
 
 
 

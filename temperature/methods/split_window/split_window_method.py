@@ -1,5 +1,5 @@
 import numpy as np 
-from getemp.general_utils import compute_proportion_vegetation_cover
+from getemp.general_utils import fractional_vegetation_cover
 
 #def SplitWindowSobrino(t1, t2, e1, e2, cwv=0.013, mask=None):
 #      #REFERENCE: Skokovic D, Sobrino JA, Jiménez Muñoz JC, SoriaG, Julien Y,Mattar C, Cristóbal J (2014)
@@ -39,7 +39,7 @@ class SplitWindowParentLST:
 
             raise NotImplementedError("Concrete method yet to be implemented")
       
-class SplitWindowSobrinoLST(SplitWindowParentLST):
+class SplitWindowJiminezMunozLST(SplitWindowParentLST):
       def __init__(self):
             """
             Method references:
@@ -56,11 +56,7 @@ class SplitWindowSobrinoLST(SplitWindowParentLST):
             self.cwv = 0.013
 
       def _compute_lst(self, dict_):
-            """[summary]
-            dict_ should contain the following keys
-            dict_ keys:
-                  brightness_temperature_10 (np.ndarray): Landsat 8 image band 10  (converted to brightness temperature). 
-                  emissivity (np.ndarray): The emmisivity image derived from computing emissivity
+            """
 
             Returns:
                   np.ndarray: Land surface temmperature
@@ -120,7 +116,7 @@ class SplitWindowKerrLST(SplitWindowParentLST):
             ndvi = dict_['ndvi']
             mask = dict_['mask']
    
-            pv = compute_proportion_vegetation_cover(ndvi)
+            pv = fractional_vegetation_cover(ndvi)
 
             lst = (
                   (tb_10 * 
@@ -149,7 +145,7 @@ class SplitWindowMcClainLST(SplitWindowParentLST):
       """
 
       def _compute_lst(self, dict_):
-            """[summary]
+            """
 
             Returns:
                   np.ndarray: Land surface temmperature
@@ -205,3 +201,45 @@ class SplitWindowPriceLST(SplitWindowParentLST):
             lst[mask] = np.nan 
 
             return lst
+
+class SplitWindowSobrino1993LST(SplitWindowParentLST):
+      """
+      Method reference:
+
+      Sobrino JA, Caselles V, Coll C (1993) Theoretical split window algorithms 
+      for determining the actual surface temperature. I1Nuovo Cimento 16:219–236. 
+      https://doi.org/10.1007/BF02524225
+
+      """
+      def _compute_lst(self, dict_):
+            """[summary]
+
+            Returns:
+                  np.ndarray: Land surface temmperature
+            """
+
+            # TODO: Assertions for size (equal and single band) and that band 10 is not none
+
+
+            tb_10 = dict_['brightness_temperature_10']
+            tb_11 = dict_['brightness_temperature_11']
+            emm_10 = dict_['emissivity_10']
+            emm_11 = dict_['emissivity_11']
+            mask = dict_['mask']
+   
+
+            diff_tb = tb_10 - tb_11
+            diff_e = emm_10 - emm_11 
+
+            lst = (
+                  tb_10 + (1.06 * (diff_tb)) +
+                  (0.46 * diff_tb**2) +
+                  (53 * (1 -  emm_10)) -
+                  (53 * (emm_10 - emm_11))
+            )
+
+            lst[mask] = np.nan 
+
+            return lst
+
+      

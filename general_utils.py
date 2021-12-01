@@ -103,5 +103,40 @@ def compute_ndvi(nir: np.ndarray,
         
     return to_return
 
-def compute_proportion_vegetation_cover(ndvi):
-    return ((ndvi - np.min(ndvi)) / (np.max(ndvi) - np.min(ndvi))) ** 2
+def fractional_vegetation_cover(ndvi):
+    """[summary]
+
+    Args:
+        ndvi (np.ndarray):  Normalized difference vegetation index (m x n)
+    Returns:
+        np.ndarray: Fractional vegetation cover 
+    """
+    assert len(ndvi.shape) == 2, "NDVI image should be 2-dimensional"
+
+    return ((ndvi - 0.2)/(0.5 - 0.2))**2
+
+
+
+def cavity_effect(
+            emissivity_veg, 
+            emissivity_soil, 
+            fractional_vegetation_cover, 
+            geometrical_factor=0.55
+    ):
+    
+    """Computes cavity effect from fractional vegetation cover matrix
+
+    Args:
+        frac_vegetation_cover (np.ndarray): Fractional vegetation cover matrix
+
+    Returns:
+        np.ndarray: Cavity effect matric
+    """
+    #fractional_veg_cover = fractional_vegetation_cover()
+    to_return = (
+        (1 - emissivity_soil) * 
+        emissivity_veg * geometrical_factor * 
+        (1 - fractional_vegetation_cover)
+    )
+
+    return to_return 
