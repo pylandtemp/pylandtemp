@@ -1,7 +1,7 @@
 
 import numpy as np
 
-class MonoWindow:
+class MonoWindowLST:
     def __init__(self):
         """
         Method reference:
@@ -28,7 +28,7 @@ class MonoWindow:
             np.ndarray: Land surface temmperature
         """
         temperature_band = dict_['brightness_temperature_10']
-        emissivity = dict_['emissivity']
+        emissivity = dict_['emissivity_10']
 
         if temperature_band.shape != emissivity.shape:
             raise ValueError("Temperature image and emissivity images must be of the same size/shape")
@@ -45,6 +45,4 @@ class MonoWindow:
         land_surface_temp[nan_mask] = np.nan 
         return land_surface_temp
 
-        def generate_nan_mask(self, image)-> ndarray:
-            
-            return np.isnan(image) 
+    

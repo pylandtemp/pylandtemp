@@ -1,5 +1,4 @@
 import numpy as np 
-from emissivity.utils import fractional_vegetation_cover, cavity_effect
 from emissivity.methods import ComputeMonoWindowEmissivity, ComputeEmissivityNBEM, ComputeEmissivityGopinadh
 
 
@@ -26,7 +25,8 @@ class Emissivity:
         self.methods = methods
     
     def __call__(self, method):
-        assert method in EMISSIVITY_METHODS, ValueError("Method not implemented")
+        assert method in self.methods, ValueError("Requested method not implemented. Choose among available methods: {self.methods}")
+
         compute_method = self._get_method(method)
 
         return compute_method(self.ndvi, self.red_band)()

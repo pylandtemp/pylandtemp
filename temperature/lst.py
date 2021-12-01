@@ -11,12 +11,13 @@ class LST:
         self.lst_methods = lst_methods
         self.method = method
 
-    def __call__(self, emissivity, brightness_temperature_10, brightness_temperature_11=None, column_water_vapour=None):
+    def __call__(self, emissivity_10, brightness_temperature_10, emissivity_11=None, brightness_temperature_11=None, column_water_vapour=None):
 
         lst_method_fn = self._get_methods(self.method)
 
         dict_input = get_lst_compute_fn_input(
-                                            emissivity, 
+                                            emissivity_10,
+                                            emissivity_11, 
                                             brightness_temperature_10, 
                                             brightness_temperature_11, 
                                             column_water_vapour

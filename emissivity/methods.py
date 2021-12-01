@@ -4,8 +4,8 @@ from emissivity.utils import EmissivityParent
 
 class ComputeMonoWindowEmissivity(EmissivityParent):
     
-    def __init__(self, ndvi, red_band=None):
-        super(ComputeMonoWindowEmissivity, self).__init__(ndvi, red_band)
+    def __init__(self, ndvi, red_band=None, mask=None):
+        super(ComputeMonoWindowEmissivity, self).__init__(ndvi, red_band, mask)
         self.emissivity_soil = 0.97 
         self.emissivity_veg = 0.99
 
@@ -37,7 +37,7 @@ class ComputeMonoWindowEmissivity(EmissivityParent):
 class ComputeEmissivityNBEM(EmissivityParent):
 
 
-    def __init__(self, ndvi, red_band):
+    def __init__(self, ndvi, red_band, mask=None):
         """
         Method references:
 
@@ -54,7 +54,7 @@ class ComputeEmissivityNBEM(EmissivityParent):
             ndvi (np.ndarray[float]): Normalized difference vegetation index (NDVI) image matrix
             red_band (np.ndarray[float]): Red band of image (0.63-0.69 micrometers)
         """
-        super(ComputeEmissivityNBEM, self).__init__(ndvi, red_band)
+        super(ComputeEmissivityNBEM, self).__init__(ndvi, red_band, mask)
         self.emissivity_soil = 0.9668 
         self.emissivity_veg = 0.9863
 
@@ -96,7 +96,7 @@ class ComputeEmissivityNBEM(EmissivityParent):
 
 class ComputeEmissivityGopinadh(EmissivityParent):
 
-    def __init__(self, ndvi, red_band=None):
+    def __init__(self, ndvi, red_band=None, mask=None):
         """
         Method reference:
 
@@ -108,7 +108,7 @@ class ComputeEmissivityGopinadh(EmissivityParent):
             ndvi (np.ndarray[float]): Normalized difference vegetation index (NDVI) image matrix
             red_band (np.ndarray[float]): Red band of image (0.63-0.69 micrometers). Defaults to None.
         """
-        super(ComputeEmissivityGopinadh, self).__init__(ndvi, red_band)
+        super(ComputeEmissivityGopinadh, self).__init__(ndvi, red_band, mask)
         self.emissivity_soil = 0.9668
         self.emissivity_veg = 0.9747
     

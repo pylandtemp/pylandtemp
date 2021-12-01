@@ -1,7 +1,7 @@
 import numpy as np
 
 class EmissivityParent:
-    def __init__(self, ndvi, red_band):
+    def __init__(self, ndvi, red_band, mask):
         """ Parent class for all emissivity methods. Contains general methods and attributes
 
         Args:
@@ -13,7 +13,7 @@ class EmissivityParent:
         self.red_band = red_band
         
         self.emissivity = np.zeros_like(ndvi) 
-        self.nan_mask = np.isnan(ndvi) # mask for nan values 
+        self.nan_mask = mask # mask for nan values 
 
         self.ndvi_min = -1
         self.ndvi_max = 1
@@ -69,8 +69,6 @@ class EmissivityParent:
         """
 
         masks = self._get_land_surface_mask()
-
-        # Baresoil value assignment
         baresoil = np.where(masks['baresoil'])
         vegetation = np.where(masks['vegetation'])
         mixed = np.where(masks['mixed'])

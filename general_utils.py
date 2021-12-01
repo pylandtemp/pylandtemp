@@ -78,13 +78,13 @@ def compute_ndvi(nir: np.ndarray,
     """Takes the near infrared and red bands of an optical satellite image as input and returns the ndvi: normalized difference vegetation index
 
     Args:
-        nir (np.ndarray): [Near-infrared band image]
-        red (np.ndarray): [Red band image]
+        nir (np.ndarray): Near-infrared band image
+        red (np.ndarray): Red-band image
         eps (float): Epsilon to avoid ZeroDivisionError in numpy
         use_mask (bool): If True, mask NaN and 0 values in input images. 
 
     Returns:
-        np.ndarray: [Normalized difference vegetation index]
+        np.ndarray: Normalized difference vegetation index
     """
     
     assert nir.shape == red.shape, f"Both images must be of the same dimension, {nir.shape}, {red.shape}"
@@ -102,3 +102,6 @@ def compute_ndvi(nir: np.ndarray,
         to_return[i, j] = np.nan
         
     return to_return
+
+def compute_proportion_vegetation_cover(ndvi):
+    return ((ndvi - np.min(ndvi)) / (np.max(ndvi) - np.min(ndvi))) ** 2
