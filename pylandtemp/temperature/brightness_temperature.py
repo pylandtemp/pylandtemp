@@ -1,6 +1,6 @@
 
 import numpy as np
-from temperature.utils import compute_brightness_temperature
+from pylandtemp.temperature.utils import compute_brightness_temperature
 #from typing import List, Optional 
 
 

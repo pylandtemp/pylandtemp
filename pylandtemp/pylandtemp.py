@@ -1,10 +1,10 @@
-from emissivity import Emissivity, EMISSIVITY_METHODS
+from pylandtemp.emissivity import Emissivity, EMISSIVITY_METHODS
 
-from temperature import BrightnessTemperatureLandsat
-from temperature import LST
-from temperature import  SINGLE_WINDOW_METHODS, SPLIT_WINDOW_METHODS
+from pylandtemp.temperature import BrightnessTemperatureLandsat
+from pylandtemp.temperature import LST
+from pylandtemp.temperature import  SINGLE_WINDOW_METHODS, SPLIT_WINDOW_METHODS
 
-from general_utils import compute_ndvi
+from pylandtemp.general_utils import compute_ndvi
 
 
 
@@ -68,8 +68,22 @@ def single_window(
 
     return lst_image 
 
-def emissivity(ndvi_image, emissivity_method='avdan'):
-    emissivity_10, emissivity_11 = Emissivity(ndvi_image, None)(emissivity_method)
+def emissivity(ndvi_image, emissivity_method='avdan', landsat_band_4=None):
+    """[summary]
+
+    Args:
+        ndvi_image ([type]): NDVI image
+        emissivity_method (str, optional): method. Defaults to 'avdan'.
+        landsat_band_4 ([type], optional): red band image. Defaults to None.
+
+    Returns:
+        [type]: [description]
+    """
+
+    if emissivity_method == 'xiaolei':
+        assert landsat_band_4 is not None, ValueError(f'The red band has to be provided if {emissivity_method} is to be used')
+
+    emissivity_10, emissivity_11 = Emissivity(ndvi_image, landsat_band_4)(emissivity_method)
     return emissivity_10, emissivity_11
 
 def ndvi(nir, red, mask):

@@ -1,5 +1,5 @@
-from temperature.methods.mono_window import MonoWindowLST
-from temperature.methods.split_window.split_window_methods import (
+from pylandtemp.temperature.methods.mono_window import MonoWindowLST
+from pylandtemp.temperature.methods.split_window.split_window_methods import (
     SplitWindowJiminezMunozLST,
     SplitWindowKerrLST,
     SplitWindowMcClainLST,
@@ -7,7 +7,7 @@ from temperature.methods.split_window.split_window_methods import (
     SplitWindowSobrino1993LST,
     SplitWindowCollCasellesLST
 )
-from temperature.utils import get_lst_compute_fn_input
+from pylandtemp.temperature.utils import get_lst_compute_fn_input
 import numpy as np
 
 SINGLE_WINDOW_METHODS = {

@@ -1,5 +1,5 @@
 import numpy as np
-from general_utils import fractional_vegetation_cover
+from pylandtemp.general_utils import fractional_vegetation_cover
 
 
 class EmissivityParent:

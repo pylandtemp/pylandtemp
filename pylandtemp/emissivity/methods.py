@@ -1,6 +1,8 @@
 import numpy as np
-from emissivity.utils import EmissivityParent   
-from general_utils import cavity_effect     
+from pylandtemp.emissivity.utils import EmissivityParent   
+from pylandtemp.general_utils import cavity_effect     
+
+from pylandtemp.general_utils import rescale_band
 
 
 class ComputeMonoWindowEmissivity(EmissivityParent):
@@ -70,6 +72,8 @@ class ComputeEmissivityNBEM(EmissivityParent):
         assert self.red_band is not None, \
             ValueError("Red band cannot be {} for this emissivity computation method".format(self.red_band))
 
+        self.red_band = rescale_band(self.red_band)
+        
         landcover_mask_indices = self._get_landcover_mask_indices()
 
         fractional_veg_cover = self._compute_fvc()

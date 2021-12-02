@@ -1,5 +1,5 @@
 import numpy as np 
-from emissivity.methods import ComputeMonoWindowEmissivity, ComputeEmissivityNBEM, ComputeEmissivityGopinadh
+from pylandtemp.emissivity.methods import ComputeMonoWindowEmissivity, ComputeEmissivityNBEM, ComputeEmissivityGopinadh
 
 
 
