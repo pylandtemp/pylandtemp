@@ -74,7 +74,7 @@ def generate_mask(image)-> np.ndarray:
 def compute_ndvi(nir: np.ndarray, 
                 red: np.ndarray, 
                 eps=1e-15,
-                use_mask= True)-> np.ndarray:
+                mask= None)-> np.ndarray:
     """Takes the near infrared and red bands of an optical satellite image as input and returns the ndvi: normalized difference vegetation index
 
     Args:
@@ -89,19 +89,21 @@ def compute_ndvi(nir: np.ndarray,
     
     assert nir.shape == red.shape, f"Both images must be of the same dimension, {nir.shape}, {red.shape}"
     
-    ndvi = np.empty(nir.shape)
+    #ndvi = np.empty(nir.shape)
     ndvi = (nir - red) / (nir + red + eps)
     
-    to_return = np.where(np.abs(ndvi)>1, np.nan, ndvi) 
+    ndvi[abs(ndvi) > 1] = np.nan
     
-    if use_mask:
-        mask_nir = generate_mask(nir)
-        mask_red = generate_mask(red)
-        mask = np.logical_and(mask_nir, mask_red)
-        i, j = np.where(~mask)
-        to_return[i, j] = np.nan
+    #if use_mask:
+    #    mask_nir = generate_mask(nir)
+    #    mask_red = generate_mask(red)
+    #    mask = np.logical_and(mask_nir, mask_red)
+    #    i, j = np.where(~mask)
+    #    to_return[i, j] = np.nan
+    if mask is not None:
+        ndvi[mask] = np.nan 
         
-    return to_return
+    return ndvi
 
 def fractional_vegetation_cover(ndvi):
     """[summary]
@@ -123,7 +125,7 @@ def cavity_effect(
             fractional_vegetation_cover, 
             geometrical_factor=0.55
     ):
-    
+
     """Computes cavity effect from fractional vegetation cover matrix
 
     Args:

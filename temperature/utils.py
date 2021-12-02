@@ -23,33 +23,17 @@ def compute_brightness_temperature(image: np.ndarray,
                     folder metadata (K1_CONSTANT_BAND_x, where x is the thermal band number)
         k2 (float): Band-specific thermal conversion constant from the image 
                     folder metadata (K2_CONSTANT_BAND_x, where x is the thermal band number.
-                    unit (str):  'kelvin' or 'celcius' 
         mask (bool): True if you want to mask NaN, O or irregular values from the computation
 
     Returns:
         np.ndarray: Brightness temperature corrected landsat image
     """
-
-    #if unit not in ['kelvin', 'celcius']:
-    #    raise ValueError("unit argument should be set to either 'kelvin' or 'celcius'")
-
-
-    toa_radiance = np.empty(image.shape)
-    brightness_temp = np.empty(image.shape)
-
+    toa_radiance = (M * image) + A
+    brightness_temp = (k2 / (np.log((k1 / toa_radiance) + 1))) 
     
-    if mask:  
-        mask_true = generate_mask(image)
-        #i,j = np.where(mask_true)
-        toa_radiance[mask_true] = (M * image[mask_true]) + A
-        brightness_temp[mask_true] = k2 / (np.log((k1/toa_radiance[mask_true]) + 1))
 
-    else:
-        toa_radiance = (M * image) + A
-        brightness_temp = (k2 / (np.log((k1 / toa_radiance) + 1))) 
-    
-    #if unit == 'celcius':
-    #    brightness_temp = brightness_temp - 273.15
+    if mask is not None:
+        brightness_temp[mask] = np.nan
     return brightness_temp
 
 

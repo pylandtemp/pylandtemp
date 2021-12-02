@@ -1,21 +1,49 @@
 
 import numpy as np
 from temperature.utils import compute_brightness_temperature
-from typing import List, Optional 
-import numpy.ma as ma
+#from typing import List, Optional 
 
 
 
-class BrightnessTemperature:
-    def __init__(
-                self, 
-                mult_factor: float, 
-                add_factor: float , 
-                k1_constant: float, 
-                k2_constant: float, 
-                unit: str='kelvin'
-                
-            ):
+class BrightnessTemperatureLandsat:
+    def __init__(self):
+
+        self.mult_factor = 0.0003342
+        self.add_factor = 0.1
+        self.k1_constant_10 = 774.89
+        self.k1_constant_11 = 480.89
+        self.k2_constant_10 = 1321.08
+        self.k2_constant_11 = 1201.14
+        #self.unit = unit
+
+    def __call__(self, band_10: np.ndarray, band_11: np.ndarray=None, mask=None)->np.ndarray: #: Optional[np.ndarray]=None)
+        """
+
+        Args:
+            band_10 (np.ndarray): Level 1 quantized and calibrated scaled Digital Numbers (DN) TIR band data  for Band 10 landsat 8 data
+            band_11 (np.ndarray): Level 1 quantized and calibrated scaled Digital Numbers (DN) TIR band data  for Band 11 landsat 8 data
+            unit (str): 'kelvin' or 'celcius'
+            mask (bool): Mask zero or NaN values. Defaults to True 
+
+
+        Returns:
+            Tuple(np.ndarray(m x n), np.ndarray(m x n)) -> Band 10 brightness temperature, Band 11 brightness temperature
+        """
+        tb_band_10 = self._compute_brightness_temp(band_10, self.k1_constant_10, self.k2_constant_10, mask)
+
+        tb_band_11 = None
+        if band_11 is not None:
+            tb_band_11 = self._compute_brightness_temp(band_11, self.k1_constant_11, self.k2_constant_11, mask)
+
+        return tb_band_10, tb_band_11
+    
+    def _compute_brightness_temp(
+                        self, 
+                        image: np.ndarray, 
+                        k1: float, 
+                        k2: float,  
+                        mask: np.ndarray)-> np.ndarray:
+
         """Converts image raw digital numbers to brightness temperature
 
         Args:
@@ -23,34 +51,16 @@ class BrightnessTemperature:
                                     from the image folder metadata (RADIANCE_MULT_BAND_x, where x is the band index).
             add_factor (float): Band-specific additive rescaling factor 
                                     from the image folder metadata (RADIANCE_ADD_BAND_x, where x is the band index).
-            k1_constant (float): Band-specific thermal conversion constant 
+            k1 (float): Band-specific thermal conversion constant 
                                     from the image folder metadata (K1_CONSTANT_BAND_x, where x is the thermal band index)
-            k2_constant (float): Band-specific thermal conversion constant 
+            k2 (float): Band-specific thermal conversion constant 
                                     from the image folder metadata (K2_CONSTANT_BAND_x, where x is the thermal band index
             unit (str):  'kelvin' or 'celcius'. Defaults to 'kelvin'
+            mask (n.ndarray[bool]): Truie for pixels to mask out
             
 
         Returns:
             np.ndarray: Brightness temperature corrected image.
         """
 
-        self.mult_factor = mult_factor
-        self.add_factor = add_factor
-        self.k1_constant = k1_constant
-        self.k2_constant = k2_constant
-        self.unit = unit
-    
-    def transform(self, image: np.ndarray, mask=None) -> np.ndarray:
-            return self.__call__(image, mask)
-
-    def __call__(self, image: np.ndarray, mask=None)->np.ndarray: #: Optional[np.ndarray]=None)
-        """
-        image (np.ndarray): Level 1 quantized and calibrated scaled Digital Numbers (DN) TIR band data (e.g Band 10 landsat 8 data)
-        mask (bool): Mask zero or NaN values. Defaults to True 
-        """
-        return self._compute_brightness_temp(image, mask)
-    
-    
-    def _compute_brightness_temp(self, image: np.ndarray, mask: bool=True):
-
-        return compute_brightness_temperature(image, self.mult_factor, self.add_factor, self.k1_constant, self.k2_constant, unit=self.unit, mask=mask)
+        return compute_brightness_temperature(image, self.mult_factor, self.add_factor, k1, k2, mask)
