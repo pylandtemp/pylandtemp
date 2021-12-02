@@ -6,7 +6,6 @@ def compute_brightness_temperature(image: np.ndarray,
                                     A: float , 
                                     k1: float, 
                                     k2: float, 
-                                    unit: str='kelvin', 
                                     mask: bool =True)-> np.ndarray:
 
     """Converts image raw digital numbers to brightness temperature
@@ -24,16 +23,15 @@ def compute_brightness_temperature(image: np.ndarray,
                     folder metadata (K1_CONSTANT_BAND_x, where x is the thermal band number)
         k2 (float): Band-specific thermal conversion constant from the image 
                     folder metadata (K2_CONSTANT_BAND_x, where x is the thermal band number.
-                    unit (str):  'kelvin' or 'celcius'
-        unit (str): 'kelvin' or 'celcius', the unit of the temperature to be computed.  
+                    unit (str):  'kelvin' or 'celcius' 
         mask (bool): True if you want to mask NaN, O or irregular values from the computation
 
     Returns:
         np.ndarray: Brightness temperature corrected landsat image
     """
 
-    if unit not in ['kelvin', 'celcius']:
-        raise ValueError("unit argument should be set to either 'kelvin' or 'celcius'")
+    #if unit not in ['kelvin', 'celcius']:
+    #    raise ValueError("unit argument should be set to either 'kelvin' or 'celcius'")
 
 
     toa_radiance = np.empty(image.shape)
@@ -50,8 +48,8 @@ def compute_brightness_temperature(image: np.ndarray,
         toa_radiance = (M * image) + A
         brightness_temp = (k2 / (np.log((k1 / toa_radiance) + 1))) 
     
-    if unit == 'celcius':
-        brightness_temp = brightness_temp - 273.15
+    #if unit == 'celcius':
+    #    brightness_temp = brightness_temp - 273.15
     return brightness_temp
 
 
@@ -60,9 +58,9 @@ def get_lst_compute_fn_input(
                             emissivity_11,
                             brightness_temperature_10, 
                             brightness_temperature_11, 
+                            ndvi,
                             mask,
-                            column_water_vapour,
-                            ndvi
+                            column_water_vapour
                             ):
     """Returns a dictionary with all input to land surface temperature call methods
 
@@ -76,12 +74,12 @@ def get_lst_compute_fn_input(
         Dict: key: value mapping each input variable to corresponding name keys.
     """
     to_return = dict()
-    to_return['emissivity_10'] = emissivity_10.astype(float)
-    to_return['emissivity_11'] = emissivity_11.astype(float)
-    to_return['brightness_temperature_10'] = brightness_temperature_10.astype(float)
-    to_return['brightness_temperature_11'] = brightness_temperature_11.astype(float)
+    to_return['emissivity_10'] = emissivity_10
+    to_return['emissivity_11'] = emissivity_11
+    to_return['brightness_temperature_10'] = brightness_temperature_10 
+    to_return['brightness_temperature_11'] = brightness_temperature_11 
     to_return['mask'] = mask
-    to_return['column_water_vapour'] = column_water_vapour.astype(float)
-    to_return['ndvi'] = ndvi.astype(float)
+    to_return['column_water_vapour'] = column_water_vapour 
+    to_return['ndvi'] = ndvi 
 
     return to_return

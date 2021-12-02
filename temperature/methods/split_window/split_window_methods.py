@@ -1,32 +1,10 @@
 import numpy as np 
-from getemp.general_utils import fractional_vegetation_cover
+from general_utils import fractional_vegetation_cover
 
-#def SplitWindowSobrino(t1, t2, e1, e2, cwv=0.013, mask=None):
-#      #REFERENCE: Skokovic D, Sobrino JA, Jiménez Muñoz JC, SoriaG, Julien Y,Mattar C, Cristóbal J (2014)
-#      """
-#      t1 = TOA brightness temperature band 10
-#      t2 = TOA brightness temperature band 11
-#      e1 = Emissivity band 10
-#      e2 = Emissivity band 11
-#      cwv = Column water vapour
-#      """
-#
-#      # TODO: Implement mask. If mask, compute for only non masked locations. 
-#      # TODO: Optimize code performance. Don't precompute mean_e and diff_e
-#      # TODO: Move assertion test into a different function 
-#      # TODO: Move function class with __call__ method 
-#
-#      mean_e = (e1 + e2) / 2
-#      diff_e = np.subtract(e1, e2)
-#
-#      assert t1.shape == t2.shape == e1.shape == e2.shape == cwv.shape, "Images should have the same size"
-#
-#      lst = (t1 + (1.387 * (t1 - t2)) + (0.183 * ((t1 - t2)**2))
-#            - 0.268 + ((54.3 - (2.238 * cwv))* (1 - mean_e)) + ((-129.2 + (16.4 * cwv)) * diff_e))
-#
-#      return lst
 
 class SplitWindowParentLST:
+
+      # A comparison of all the methods can be found here:
       # https://link.springer.com/article/10.1007/s40808-020-01007-1/tables/3
       def __init__(self):
             pass
@@ -59,7 +37,7 @@ class SplitWindowJiminezMunozLST(SplitWindowParentLST):
             """
 
             Returns:
-                  np.ndarray: Land surface temmperature
+                  np.ndarray: Land surface tem perature
             """
 
             # TODO: Assertions for size (suqal and single band) and that band 10 is not none
@@ -78,13 +56,13 @@ class SplitWindowJiminezMunozLST(SplitWindowParentLST):
 
             assert tb_10.shape == tb_11.shape == emissivity_10.shape == emissivity_11.shape, "All images  (temperature and emissivity) should have the same shape and size"
 
-            lst = (t1 + 
+            lst = (tb_10 + 
                   (1.387 * diff_tb) + 
                   (0.183 * (diff_tb**2)) - 
                    0.268 + ((54.3 - (2.238 * self.cwv)) * 
                   (1 - mean_e)) + ((-129.2 + (16.4 * self.cwv)) * diff_e))
 
-            land_surface_temp[mask] = np.nan 
+            lst[mask] = np.nan 
             return lst
 
 class SplitWindowKerrLST(SplitWindowParentLST):
@@ -128,10 +106,6 @@ class SplitWindowKerrLST(SplitWindowParentLST):
             lst[mask] = np.nan 
 
             return lst
-      
-      
-
-
 
 class SplitWindowMcClainLST(SplitWindowParentLST):
       """
@@ -236,6 +210,45 @@ class SplitWindowSobrino1993LST(SplitWindowParentLST):
                   (0.46 * diff_tb**2) +
                   (53 * (1 -  emm_10)) -
                   (53 * (emm_10 - emm_11))
+            )
+
+            lst[mask] = np.nan 
+
+            return lst
+
+
+class SplitWindowCollCasellesLST(SplitWindowParentLST):
+      """
+      Method reference:
+
+      Coll C, Caselles V (1997) A split-window algorithm for land surface temperature 
+      from advanced very high-resolution radiometer data: validation and algorithm comparison. 
+      J Geophys Res 102(16697–16):713. https://doi.org/10.1029/97JD00929
+
+      """
+      def _compute_lst(self, dict_):
+            """[summary]
+
+            Returns:
+                  np.ndarray: Land surface temmperature
+            """
+
+            # TODO: Assertions for size (equal and single band) and that band 10 is not none
+
+
+            tb_10 = dict_['brightness_temperature_10']
+            tb_11 = dict_['brightness_temperature_11']
+            mask = dict_['mask']
+   
+
+            lst = (
+                  (0.39 * tb_10**2) +
+                  (2.3 * tb_10) -
+                  (0.78 * tb_10 * tb_11) -
+                  (1.34 * tb_11) -
+                  (1.34 * tb_11) +
+                  (0.39 * tb_11**2) +
+                  1.56
             )
 
             lst[mask] = np.nan 
