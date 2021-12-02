@@ -2,7 +2,7 @@ from pylandtemp.temperature.methods.mono_window import MonoWindowLST
 from pylandtemp.temperature.methods.split_window.split_window_methods import (
     SplitWindowJiminezMunozLST,
     SplitWindowKerrLST,
-    SplitWindowMcClainLST,
+    SplitWindowMcMillinLST,
     SplitWindowPriceLST,
     SplitWindowSobrino1993LST,
     SplitWindowCollCasellesLST
@@ -17,7 +17,7 @@ SINGLE_WINDOW_METHODS = {
 SPLIT_WINDOW_METHODS = {
         'jiminez-munoz': SplitWindowJiminezMunozLST,
         'kerr': SplitWindowKerrLST,
-        'mc-clain': SplitWindowKerrLST,
+        'mc-millin': SplitWindowMcMillinLST,
         'price': SplitWindowPriceLST,
         'sobrino-1993': SplitWindowSobrino1993LST,
         'coll-caselles': SplitWindowCollCasellesLST

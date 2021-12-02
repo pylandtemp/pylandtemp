@@ -18,6 +18,33 @@ def split_window(
         emissivity_method,
         unit='kelvin'
     ):
+    """Provides an interface to compute land surface temperature 
+        from landsat 8 imagery using split window method
+
+    Args:
+        landsat_band_10 (np.ndarray): Band 10 of the Landsat 8 image
+        landsat_band_11 (np.ndarray): Band 11 of the landsat 8 image
+        landsat_band_4 (np.ndarray): Band 4 of the landsat 8 image (Red band)
+        landsat_band_5 (np.ndarray): Band 5 of the landsat 8 image (Near-Infrared band)
+        lst_method (str): provide one of the valid split window method for computing land surface temperature
+                        Valid methods to add include:
+                        'jiminez-munoz': Jiminez-Munoz et al, 2008
+                        'kerr': Kerr Y et al, 2004
+                        'mc-millin': McMillin L. M. , 1975
+                        'price': Price J. C., 1984
+                        'sobrino-1993': Sobrino J. A. et al, 1993
+                        'coll-caselles': Coll C. et al, 1997
+                        
+        emissivity_method (str): provide one of the valid split window method for computing land surface emissivity. 
+                                         Valid methods to add include:
+                                        'advan': Avdan Ugur et al, 2016
+                                        'xiaolei':  Xiaolei Yu et al, 2014 
+                                        'gopinadh': Gopinadh Rongali et al 2018
+        unit (str, optional): 'kelvin' or 'celcius'. Defaults to 'kelvin'.
+
+    Returns:
+        np.ndarray: Land surface temperature (numpy array)
+    """
 
     mask = landsat_band_10 == 0
 
@@ -48,6 +75,27 @@ def single_window(
         emissivity_method='avdan',
         unit='kelvin'
     ):
+    """Provides an interface to compute land surface temperature 
+        from landsat 8 imagery using single window method
+
+    Args:
+        landsat_band_10 (np.ndarray): Band 10 of the Landsat 8 image
+        landsat_band_4 (np.ndarray): Band 4 of the Landsat 8 image (Red band)
+        landsat_band_5 (np.ndarray): Band 4 of the Landsat 8 image (Near-Infrared band)
+        lst_method (str, optional): [description]. Defaults to 'mono-window'.
+                                    Valid methods to add include:
+                                    'mono-window': Avdan Ugur et al, 2016
+        emissivity_method (str, optional): provide one of the valid split window method for computing land surface emissivity. 
+                                            Defaults to 'avdan'.
+                                         Valid methods to add include:
+                                        'advan': Avdan Ugur et al, 2016
+                                        'xiaolei':  Xiaolei Yu et al, 2014 
+                                        'gopinadh': Gopinadh Rongali et al 2018
+        unit (str, optional): 'celcius' or 'kelvin'. Defaults to 'kelvin'.
+
+    Returns:
+        np.ndarray: Land surface temperature (numpy array)
+    """
 
     mask = landsat_band_10 == 0
 
@@ -69,15 +117,21 @@ def single_window(
     return lst_image 
 
 def emissivity(ndvi_image, emissivity_method='avdan', landsat_band_4=None):
-    """[summary]
+    """Provides an interface to compute land surface emissivity 
+        from landsat 8 imagery 
 
     Args:
-        ndvi_image ([type]): NDVI image
-        emissivity_method (str, optional): method. Defaults to 'avdan'.
-        landsat_band_4 ([type], optional): red band image. Defaults to None.
+        ndvi_image (np.ndarray): Normalized difference vegetation index image
+        emissivity_method (str, optional): provide one of the valid split window method for computing land surface emissivity. 
+                                            Defaults to 'avdan'.
+                                         Valid methods to add include:
+                                        'advan': Avdan Ugur et al, 2016
+                                        'xiaolei':  Xiaolei Yu et al, 2014 
+        landsat_band_4 (None or np.ndarray, optional): red band image. Defaults to None.
+                                                        Can be None except when emissivity_method = 'xiaolei'
 
     Returns:
-        [type]: [description]
+        np.ndarray: Emissivity numpy array
     """
 
     if emissivity_method == 'xiaolei':
@@ -86,9 +140,29 @@ def emissivity(ndvi_image, emissivity_method='avdan', landsat_band_4=None):
     emissivity_10, emissivity_11 = Emissivity(ndvi_image, landsat_band_4)(emissivity_method)
     return emissivity_10, emissivity_11
 
-def ndvi(nir, red, mask):
-    return compute_ndvi(nir, red, mask=mask)
+def ndvi(landsat_band_5, landsat_band_4, mask):
+    """[summary]
 
-def brightness_temperature(band_10, band_11=None, mask=None):
-    brightness_temp_10, brightness_temp_11 = BrightnessTemperatureLandsat()(band_10, band_11,mask=mask)
+    Args:
+        landsat_band_5 (np.ndarray): Band 5 of landsat 8 image
+        landsat_band_4 (np.ndarray): Band 4 of landsat 8 image
+        mask (np.ndarray[bool]): output is NaN where Mask == True
+
+    Returns:
+        np.ndarray: NVDI numpy array
+    """
+    return compute_ndvi(landsat_band_5, landsat_band_4, mask=mask)
+
+def brightness_temperature(landsat_band_10, landsat_band_11=None, mask=None):
+    """[summary]
+
+    Args:
+        landsat_band_10 (np.ndarray): Band 10 of landsat 8 image
+        landsat_band_11 (np.ndarray): Band 11 of landsat 8 image. Defaults to None.
+        mask (np.ndarray[bool]): output is NaN where Mask == True. Defaults to None.
+
+    Returns:
+        np.ndarray: Brightness temperature numpy array
+    """
+    brightness_temp_10, brightness_temp_11 = BrightnessTemperatureLandsat()(landsat_band_10, landsat_band_11,mask=mask)
     return brightness_temp_10, brightness_temp_11
