@@ -27,7 +27,7 @@ LST_METHODS = dict(SPLIT_WINDOW_METHODS, **SINGLE_WINDOW_METHODS)
 
 
 class LST:
-    def __init__(self, method, lst_methods=LST_METHODS.keys()):
+    def __init__(self, method, lst_methods=LST_METHODS):
 
         assert method in lst_methods, ValueError(f"method must be one of {list(lst_methods.keys())}")
 
