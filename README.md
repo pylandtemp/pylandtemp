@@ -1,4 +1,6 @@
 # pylandtemp
+[![GitHub stars](https://img.shields.io/github/stars/pylandtemp/pylandtemp)](https://github.com/pylandtemp/pylandtemp/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/pylandtemp/pylandtemp)](https://github.com/pylandtemp/pylandtemp/issues)
 
 
 ## Description
@@ -20,13 +22,13 @@ Even though only Landsat 8 images are currently 'officially' supported, the meth
 
 
 ## How to start using pylandtemp
-The notebooks [here]() are a good place to start.
+The notebooks [here](https://github.com/pylandtemp/pylandtemp/tree/master/tutorials) are a good place to start.
 
 
 
-## How to contribute to pylandtemp?
+## How to contribute to pylandtemp
 
-All kinds of contributions are welcome. Development of enhancements, bug fixes, documentation, tutorial notebooks, new methods, new data, etc.... 
+All kinds of contributions are welcome --- development of enhancements, bug fixes, documentation, tutorial notebooks, new methods, new data, etc.... 
 
 A guide to get you started with contributing to pylandtemp is available [here]().
 
