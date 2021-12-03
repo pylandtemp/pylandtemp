@@ -1,7 +1,8 @@
 /data
 /boiler_plate_fns
 *.TIF
-*.tif
+*.
+.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
