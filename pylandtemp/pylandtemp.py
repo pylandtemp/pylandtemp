@@ -52,7 +52,7 @@ def split_window(
 
     ndvi_image = ndvi(landsat_band_5, landsat_band_4, mask)
 
-    brightness_temp_10, brightness_temp_11 = brightness_temperature(landsat_band_10, band_11=landsat_band_11, mask=mask)
+    brightness_temp_10, brightness_temp_11 = brightness_temperature(landsat_band_10, landsat_band_11=landsat_band_11, mask=mask)
     emissivity_10, emissivity_11 = Emissivity(ndvi_image, landsat_band_4)(emissivity_method)
 
     lst_fn = LST(method=lst_method)
@@ -127,7 +127,7 @@ def emissivity(ndvi_image, emissivity_method='avdan', landsat_band_4=None):
 
     Args:
         ndvi_image (np.ndarray): Normalized difference vegetation index image
-        
+
         emissivity_method (str, optional): provide one of the valid split window method for computing land surface emissivity. 
                                             Defaults to 'avdan'.
                                          Valid methods to add include:

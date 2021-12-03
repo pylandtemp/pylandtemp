@@ -4,8 +4,7 @@ from pylandtemp.temperature.methods.split_window.split_window_methods import (
     SplitWindowKerrLST,
     SplitWindowMcMillinLST,
     SplitWindowPriceLST,
-    SplitWindowSobrino1993LST,
-    SplitWindowCollCasellesLST
+    SplitWindowSobrino1993LST
 )
 from pylandtemp.temperature.utils import get_lst_compute_fn_input
 import numpy as np
@@ -19,8 +18,8 @@ SPLIT_WINDOW_METHODS = {
         'kerr': SplitWindowKerrLST,
         'mc-millin': SplitWindowMcMillinLST,
         'price': SplitWindowPriceLST,
-        'sobrino-1993': SplitWindowSobrino1993LST,
-        'coll-caselles': SplitWindowCollCasellesLST
+        'sobrino-1993': SplitWindowSobrino1993LST
+        #'coll-caselles': SplitWindowCollCasellesLST
 
 }
 LST_METHODS = dict(SPLIT_WINDOW_METHODS, **SINGLE_WINDOW_METHODS)

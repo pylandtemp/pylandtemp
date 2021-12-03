@@ -164,12 +164,12 @@ class SplitWindowPriceLST(SplitWindowParentLST):
             emm_10 = dict_['emissivity_10']
             emm_11 = dict_['emissivity_11']
             mask = dict_['mask']
-   
+            #[BT10+3.33×(BT10−BT11)]×[(5.5−𝜀10)/4.5]+0.75×BT11×Δ𝜀
       
             lst = (
                   (tb_10 + 3.33 * (tb_10 - tb_11)) * 
-                  ((3.5 * emm_10) / 4.5) + 
-                  (0.75 * tb_11 * (emm_10 * emm_11))
+                  ((5.5 - emm_10) / 4.5) + 
+                  (0.75 * tb_11 * (emm_10 - emm_11))
             )
 
             lst[mask] = np.nan 
@@ -209,7 +209,7 @@ class SplitWindowSobrino1993LST(SplitWindowParentLST):
                   tb_10 + (1.06 * (diff_tb)) +
                   (0.46 * diff_tb**2) +
                   (53 * (1 -  emm_10)) -
-                  (53 * (emm_10 - emm_11))
+                  (53 * (diff_e))
             )
 
             lst[mask] = np.nan 
@@ -217,42 +217,3 @@ class SplitWindowSobrino1993LST(SplitWindowParentLST):
             return lst
 
 
-class SplitWindowCollCasellesLST(SplitWindowParentLST):
-      """
-      Method reference:
-
-      Coll C, Caselles V (1997) A split-window algorithm for land surface temperature 
-      from advanced very high-resolution radiometer data: validation and algorithm comparison. 
-      J Geophys Res 102(16697–16):713. https://doi.org/10.1029/97JD00929
-
-      """
-      def _compute_lst(self, dict_):
-            """[summary]
-
-            Returns:
-                  np.ndarray: Land surface temmperature
-            """
-
-            # TODO: Assertions for size (equal and single band) and that band 10 is not none
-
-
-            tb_10 = dict_['brightness_temperature_10']
-            tb_11 = dict_['brightness_temperature_11']
-            mask = dict_['mask']
-   
-
-            lst = (
-                  (0.39 * tb_10**2) +
-                  (2.3 * tb_10) -
-                  (0.78 * tb_10 * tb_11) -
-                  (1.34 * tb_11) -
-                  (1.34 * tb_11) +
-                  (0.39 * tb_11**2) +
-                  1.56
-            )
-
-            lst[mask] = np.nan 
-
-            return lst
-
-      
