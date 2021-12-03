@@ -1,5 +1,8 @@
 # pylandtemp
+
+[![GitHub license](https://img.shields.io/github/license/pylandtemp/pylandtemp)](https://github.com/pylandtemp/pylandtemp/blob/master/LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/pylandtemp/pylandtemp)](https://github.com/pylandtemp/pylandtemp/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/pylandtemp/pylandtemp)](https://github.com/pylandtemp/pylandtemp/network)
 [![GitHub issues](https://img.shields.io/github/issues/pylandtemp/pylandtemp)](https://github.com/pylandtemp/pylandtemp/issues)
 
 

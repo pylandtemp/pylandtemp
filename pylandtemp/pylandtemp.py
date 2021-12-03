@@ -26,6 +26,7 @@ def split_window(
         landsat_band_11 (np.ndarray): Band 11 of the landsat 8 image
         landsat_band_4 (np.ndarray): Band 4 of the landsat 8 image (Red band)
         landsat_band_5 (np.ndarray): Band 5 of the landsat 8 image (Near-Infrared band)
+
         lst_method (str): provide one of the valid split window method for computing land surface temperature
                         Valid methods to add include:
                         'jiminez-munoz': Jiminez-Munoz et al, 2008
@@ -40,6 +41,7 @@ def split_window(
                                         'advan': Avdan Ugur et al, 2016
                                         'xiaolei':  Xiaolei Yu et al, 2014 
                                         'gopinadh': Gopinadh Rongali et al 2018
+
         unit (str, optional): 'kelvin' or 'celcius'. Defaults to 'kelvin'.
 
     Returns:
@@ -82,15 +84,18 @@ def single_window(
         landsat_band_10 (np.ndarray): Band 10 of the Landsat 8 image
         landsat_band_4 (np.ndarray): Band 4 of the Landsat 8 image (Red band)
         landsat_band_5 (np.ndarray): Band 4 of the Landsat 8 image (Near-Infrared band)
+
         lst_method (str, optional): [description]. Defaults to 'mono-window'.
                                     Valid methods to add include:
                                     'mono-window': Avdan Ugur et al, 2016
+
         emissivity_method (str, optional): provide one of the valid split window method for computing land surface emissivity. 
                                             Defaults to 'avdan'.
                                          Valid methods to add include:
                                         'advan': Avdan Ugur et al, 2016
                                         'xiaolei':  Xiaolei Yu et al, 2014 
                                         'gopinadh': Gopinadh Rongali et al 2018
+
         unit (str, optional): 'celcius' or 'kelvin'. Defaults to 'kelvin'.
 
     Returns:
@@ -122,11 +127,13 @@ def emissivity(ndvi_image, emissivity_method='avdan', landsat_band_4=None):
 
     Args:
         ndvi_image (np.ndarray): Normalized difference vegetation index image
+        
         emissivity_method (str, optional): provide one of the valid split window method for computing land surface emissivity. 
                                             Defaults to 'avdan'.
                                          Valid methods to add include:
                                         'advan': Avdan Ugur et al, 2016
                                         'xiaolei':  Xiaolei Yu et al, 2014 
+
         landsat_band_4 (None or np.ndarray, optional): red band image. Defaults to None.
                                                         Can be None except when emissivity_method = 'xiaolei'
 
