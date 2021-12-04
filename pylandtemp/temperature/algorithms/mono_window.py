@@ -35,7 +35,5 @@ class MonoWindowLST:
         land_surface_temp = temperature_band / (
             1 + (((0.0000115 * temperature_band) / 14380) * np.log(emissivity))
         )
-
         land_surface_temp[mask] = np.nan
-
         return land_surface_temp

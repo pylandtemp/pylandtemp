@@ -8,11 +8,9 @@ def generate_mask(image: np.ndarray) -> np.ndarray:
     Args:
         image (np.ndarray): Single-band image which is True where we do not want to mask and False where we want to mask.
     """
-
     zero_mask = image != 0
     nan_mask = image != np.nan
     mask_true = np.logical_and(zero_mask, nan_mask)
-
     return mask_true
 
 
@@ -30,14 +28,10 @@ def compute_ndvi(
     Returns:
         np.ndarray: Normalized difference vegetation index
     """
-
     ndvi = (nir - red) / (nir + red + eps)
-
     ndvi[abs(ndvi) > 1] = np.nan
-
     if mask is not None:
         ndvi[mask] = np.nan
-
     return ndvi
 
 
@@ -51,7 +45,6 @@ def fractional_vegetation_cover(ndvi: np.ndarray) -> np.ndarray:
     """
     if len(ndvi.shape) != 2:
         raise ValueError("NDVI image should be 2-dimensional")
-
     return ((ndvi - 0.2) / (0.5 - 0.2)) ** 2
 
 
@@ -78,7 +71,6 @@ def cavity_effect(
         * geometrical_factor
         * (1 - fractional_vegetation_cover)
     )
-
     return to_return
 
 

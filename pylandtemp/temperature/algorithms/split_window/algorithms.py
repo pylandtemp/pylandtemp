@@ -12,13 +12,10 @@ class SplitWindowParentLST:
 
     def __call__(self, **kwargs) -> np.ndarray:
         lst = self._compute_lst(**kwargs)
-
         lst[lst > self.max_earth_temp] = np.nan
-
         return lst
 
     def _compute_lst(self, **kwargs):
-
         raise NotImplementedError("Concrete method yet to be implemented")
 
 
@@ -48,7 +45,6 @@ class SplitWindowJiminezMunozLST(SplitWindowParentLST):
         Returns:
             np.ndarray: Land surface temperature image
         """
-
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]
         emissivity_10 = kwargs["emissivity_10"]
@@ -57,7 +53,6 @@ class SplitWindowJiminezMunozLST(SplitWindowParentLST):
 
         mean_e = (emissivity_10 + emissivity_11) / 2
         diff_e = emissivity_10 - emissivity_11
-
         diff_tb = tb_10 - tb_11
 
         lst = (
@@ -68,7 +63,6 @@ class SplitWindowJiminezMunozLST(SplitWindowParentLST):
             + ((54.3 - (2.238 * self.cwv)) * (1 - mean_e))
             + ((-129.2 + (16.4 * self.cwv)) * diff_e)
         )
-
         lst[mask] = np.nan
         return lst
 
@@ -98,7 +92,6 @@ class SplitWindowKerrLST(SplitWindowParentLST):
         Returns:
             np.ndarray: Land surface temperature image
         """
-
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]
         ndvi = kwargs["ndvi"]
@@ -112,7 +105,6 @@ class SplitWindowKerrLST(SplitWindowParentLST):
             - ((5.5 * pv) + 3.1)
         )
         lst[mask] = np.nan
-
         return lst
 
 
@@ -138,15 +130,12 @@ class SplitWindowMcMillinLST(SplitWindowParentLST):
         Returns:
             np.ndarray: Land surface temperature image
         """
-
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]
         mask = kwargs["mask"]
 
         lst = (1.035 * tb_10) + (3.046 * (tb_10 - tb_11)) - 10.93
-
         lst[mask] = np.nan
-
         return lst
 
 
@@ -173,7 +162,6 @@ class SplitWindowPriceLST(SplitWindowParentLST):
         Returns:
             np.ndarray: Land surface temperature image
         """
-
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]
         emm_10 = kwargs["emissivity_10"]
@@ -183,9 +171,7 @@ class SplitWindowPriceLST(SplitWindowParentLST):
         lst = (tb_10 + 3.33 * (tb_10 - tb_11)) * ((5.5 - emm_10) / 4.5) + (
             0.75 * tb_11 * (emm_10 - emm_11)
         )
-
         lst[mask] = np.nan
-
         return lst
 
 
@@ -213,7 +199,6 @@ class SplitWindowSobrino1993LST(SplitWindowParentLST):
         Returns:
             np.ndarray: Land surface temperature image
         """
-
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]
         emm_10 = kwargs["emissivity_10"]
@@ -230,7 +215,5 @@ class SplitWindowSobrino1993LST(SplitWindowParentLST):
             + (53 * (1 - emm_10))
             - (53 * (diff_e))
         )
-
         lst[mask] = np.nan
-
         return lst

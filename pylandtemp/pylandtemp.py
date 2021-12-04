@@ -45,9 +45,7 @@ def split_window(
     Returns:
         np.ndarray: Land surface temperature (numpy array)
     """
-
     mask = landsat_band_10 == 0
-
     ndvi_image = ndvi(landsat_band_5, landsat_band_4, mask)
 
     brightness_temp_10, brightness_temp_11 = brightness_temperature(
@@ -67,7 +65,6 @@ def split_window(
         mask=mask,
         ndvi=ndvi_image,
     )
-
     return lst_image
 
 
@@ -105,13 +102,10 @@ def single_window(
     Returns:
         np.ndarray: Land surface temperature (numpy array)
     """
-
     mask = landsat_band_10 == 0
-
     ndvi_image = ndvi(landsat_band_5, landsat_band_4, mask)
-
     brightness_temp_10, _ = brightness_temperature(landsat_band_10, mask=mask)
-    emissivity_10, _ = Emissivity(ndvi_image, landsat_band_4)(emissivity_method)
+    # emissivity_10, _ = Emissivity(ndvi_image, landsat_band_4)(emissivity_method)
 
     emissivity_10, _ = Runner(methods=emissivity_algorithms)(
         emissivity_method, ndvi=ndvi_image, red_band=landsat_band_4
@@ -124,7 +118,6 @@ def single_window(
         mask=mask,
         ndvi=ndvi_image,
     )
-
     return lst_image
 
 
@@ -151,7 +144,6 @@ def emissivity(
     Returns:
         np.ndarray: Emissivity numpy array
     """
-
     if emissivity_method == "xiaolei" and landsat_band_4 is None:
         raise ValueError(
             f"The red band has to be provided if {emissivity_method} is to be used"
