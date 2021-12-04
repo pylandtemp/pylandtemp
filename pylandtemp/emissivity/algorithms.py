@@ -46,7 +46,6 @@ class Emissivity:
         emm_10[mask] = np.nan
         if emm_11 is not None:
             emm_11[mask] = np.nan
-
         return emm_10, emm_11
 
     def _compute_emissivity(self):
@@ -62,7 +61,6 @@ class Emissivity:
         mask_mixed = (self.ndvi >= self.baresoil_ndvi_max) & (
             self.ndvi <= self.vegatation_ndvi_min
         )
-
         return {
             "baresoil": mask_baresoil,
             "vegetation": mask_vegetation,
