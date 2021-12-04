@@ -2,7 +2,7 @@ import numpy as np
 
 
 def compute_brightness_temperature(
-    image: np.ndarray, M: float, A: float, k1: float, k2: float, mask: ndarray = None
+    image: np.ndarray, M: float, A: float, k1: float, k2: float, mask: np.ndarray = None
 ) -> np.ndarray:
 
     """Converts image raw digital numbers to brightness temperature

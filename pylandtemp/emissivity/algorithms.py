@@ -1,4 +1,5 @@
 import numpy as np
+
 from pylandtemp.utils import rescale_band, cavity_effect, fractional_vegetation_cover
 
 
@@ -28,9 +29,14 @@ class Emissivity:
         if "red_band" not in kwargs:
             raise ValueError("Band 4 (red band) image is not provided")
 
-        self.__dict__.update({"ndvi": kwargs["ndvi"], "red_band": kwargs["red_band"]})
+        self.ndvi = kwargs["ndvi"]
+        self.red_band = kwargs["red_band"]
 
-        if self.red_band is not None and self.ndvi.shape != self.red_band.shape:
+        if (
+            self.ndvi is not None
+            and self.red_band is not None
+            and self.ndvi.shape != self.red_band.shape
+        ):
             raise ValueError(
                 "Input images (NDVI and Red band) must be of equal dimension"
             )
@@ -47,7 +53,6 @@ class Emissivity:
         raise NotImplementedError("No concrete implementation of emissivity method yet")
 
     def _get_land_surface_mask(self):
-
         mask_baresoil = (self.ndvi >= self.ndvi_min) & (
             self.ndvi < self.baresoil_ndvi_max
         )
@@ -68,12 +73,10 @@ class Emissivity:
         """Returns indices corresponding to the different landcover classes of of interest namely:
         vegetation, baresoil and mixed"
         """
-
         masks = self._get_land_surface_mask()
         baresoil = np.where(masks["baresoil"])
         vegetation = np.where(masks["vegetation"])
         mixed = np.where(masks["mixed"])
-
         return {"baresoil": baresoil, "vegetation": vegetation, "mixed": mixed}
 
     def _compute_fvc(self):
@@ -89,9 +92,7 @@ class ComputeMonoWindowEmissivity(Emissivity):
     emissivity_veg_11 = None
 
     def _compute_emissivity(self) -> np.ndarray:
-
         emm = np.empty_like(self.ndvi)
-
         landcover_mask_indices = self._get_landcover_mask_indices()
 
         # Baresoil value assignment

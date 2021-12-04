@@ -1,7 +1,7 @@
+import numpy as np
+
 from pylandtemp.temperature import default_algorithms as temperature_algorithms
 from pylandtemp.emissivity import default_algorithms as emissivity_algorithms
-
-
 from pylandtemp.temperature import BrightnessTemperatureLandsat
 from pylandtemp.runner import Runner
 from pylandtemp.utils import compute_ndvi

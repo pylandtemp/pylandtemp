@@ -1,4 +1,5 @@
 import numpy as np
+
 from pylandtemp.utils import fractional_vegetation_cover
 
 
