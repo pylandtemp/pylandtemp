@@ -1,1 +1,1 @@
-from pylandtemp.emissivity.emissivity_main import Emissivity, EMISSIVITY_METHODS
+from .emissivity import default_algorithms
