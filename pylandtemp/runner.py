@@ -17,4 +17,4 @@ class Runner:
             raise ValueError(
                 f"Requested method not implemented. Choose among available methods: {list(self.algorithms.values())}"
             )
-        return self.algorithms.get(algo)
+        return self.algorithms[algo]
