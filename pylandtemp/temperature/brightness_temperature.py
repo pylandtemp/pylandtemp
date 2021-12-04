@@ -64,7 +64,6 @@ class BrightnessTemperatureLandsat:
         Returns:
             np.ndarray: Brightness temperature corrected image.
         """
-
         return compute_brightness_temperature(
             image, self.mult_factor, self.add_factor, k1, k2, mask
         )
