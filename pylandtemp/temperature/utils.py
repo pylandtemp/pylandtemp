@@ -1,7 +1,5 @@
 import numpy as np
 
-# from general_utils import generate_mask
-
 
 def compute_brightness_temperature(
     image: np.ndarray, M: float, A: float, k1: float, k2: float, mask: bool = True
