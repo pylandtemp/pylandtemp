@@ -15,6 +15,6 @@ class Runner:
     def _get_algorithm(self, algo):
         if algo not in self.algorithms:
             raise ValueError(
-                f"Requested method not implemented. Choose among available methods: {list(self.methods.values())}"
+                f"Requested method not implemented. Choose among available methods: {list(self.algorithms.values())}"
             )
         return self.algorithms.get(algo)
