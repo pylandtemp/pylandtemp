@@ -2,8 +2,6 @@ import numpy as np
 
 from pylandtemp.temperature.utils import compute_brightness_temperature
 
-# from typing import List, Optional
-
 
 class BrightnessTemperatureLandsat:
     def __init__(self):
@@ -14,7 +12,6 @@ class BrightnessTemperatureLandsat:
         self.k1_constant_11 = 480.89
         self.k2_constant_10 = 1321.08
         self.k2_constant_11 = 1201.14
-        # self.unit = unit
 
     def __call__(
         self, band_10: np.ndarray, band_11: np.ndarray = None, mask=None
