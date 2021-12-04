@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 from .algorithms.mono_window import MonoWindowLST
 from .algorithms.split_window.algorithms import (
     SplitWindowJiminezMunozLST,
@@ -6,7 +8,7 @@ from .algorithms.split_window.algorithms import (
     SplitWindowPriceLST,
     SplitWindowSobrino1993LST,
 )
-from collections import namedtuple
+
 
 single_window = {"mono-window": MonoWindowLST}
 
