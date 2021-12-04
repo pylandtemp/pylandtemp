@@ -10,7 +10,7 @@ class SplitWindowParentLST:
     def __init__(self):
         self.max_earth_temp = 273.15 + 56.7
 
-    def __call__(self, **kwargs):
+    def __call__(self, **kwargs) -> np.ndarray:
         lst = self._compute_lst(**kwargs)
 
         lst[lst > self.max_earth_temp] = np.nan
@@ -34,7 +34,7 @@ class SplitWindowJiminezMunozLST(SplitWindowParentLST):
 
     """
 
-    def _compute_lst(self, **kwargs):
+    def _compute_lst(self, **kwargs) -> np.ndarray:
         """Computes the LST
 
         kwargs:
@@ -85,7 +85,7 @@ class SplitWindowKerrLST(SplitWindowParentLST):
 
     """
 
-    def _compute_lst(self, **kwargs):
+    def _compute_lst(self, **kwargs) -> np.ndarray:
         """Computes the LST
 
         kwargs:
@@ -127,7 +127,7 @@ class SplitWindowMcMillinLST(SplitWindowParentLST):
 
     """
 
-    def _compute_lst(self, **kwargs):
+    def _compute_lst(self, **kwargs) -> np.ndarray:
         """Computes the keyword arguments
 
         kwargs:
@@ -160,7 +160,7 @@ class SplitWindowPriceLST(SplitWindowParentLST):
 
     """
 
-    def _compute_lst(self, **kwargs):
+    def _compute_lst(self, **kwargs) -> np.ndarray:
         """Computes the LST
 
         kwargs:
@@ -199,7 +199,7 @@ class SplitWindowSobrino1993LST(SplitWindowParentLST):
 
     """
 
-    def _compute_lst(self, **kwargs):
+    def _compute_lst(self, **kwargs) -> np.ndarray:
 
         """
         kwargs:

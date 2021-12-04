@@ -9,10 +9,21 @@ class MonoWindowLST:
         temperature using LANDSAT 8 satellite data." Journal of sensors 2016 (2016).
         """
 
-    def __call__(self, **kwargs):
+    def __call__(self, **kwargs) -> np.ndarray:
+        """
+
+        kwargs:
+
+        **emissivity_10 (np.ndarray): Emissivity image obtained for band 10
+        **brightness_temperature_10 (np.ndarray): Brightness temperature image obtained for band 10
+        **mask (np.ndarray[bool]): Mask image. Output will have NaN value where mask is True.
+
+        Returns:
+            np.ndarray: Land surface temperature image
+        """
         return self._compute_lst_mono_window(**kwargs)
 
-    def _compute_lst_mono_window(self, **kwargs):
+    def _compute_lst_mono_window(self, **kwargs) -> np.ndarray:
         """ """
         temperature_band = kwargs["brightness_temperature_10"]
         emissivity = kwargs["emissivity_10"]

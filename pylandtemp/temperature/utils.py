@@ -33,35 +33,3 @@ def compute_brightness_temperature(
     if mask is not None:
         brightness_temp[mask] = np.nan
     return brightness_temp
-
-
-def get_lst_compute_fn_input(
-    emissivity_10,
-    emissivity_11,
-    brightness_temperature_10,
-    brightness_temperature_11,
-    ndvi,
-    mask,
-    column_water_vapour,
-):
-    """Returns a dictionary with all input to land surface temperature call methods
-
-    Args:
-        emissivity (np.ndarray(n x m)): Land surface emissivity image as a numpy array
-        brightness_temperature_10 (np.ndarray(n x m)): Land surface temperature band 10 image as a numpy array
-        brightness_temperature_11 (np.ndarray(n x m)): Land surface temperature band 11 image as a numpy array
-        column_water_vapour ([type]): [description]
-
-    Returns:
-        Dict: key: value mapping each input variable to corresponding name keys.
-    """
-    to_return = dict()
-    to_return["emissivity_10"] = emissivity_10
-    to_return["emissivity_11"] = emissivity_11
-    to_return["brightness_temperature_10"] = brightness_temperature_10
-    to_return["brightness_temperature_11"] = brightness_temperature_11
-    to_return["mask"] = mask
-    to_return["column_water_vapour"] = column_water_vapour
-    to_return["ndvi"] = ndvi
-
-    return to_return

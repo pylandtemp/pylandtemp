@@ -1,5 +1,4 @@
 import numpy as np
-from typing import Optional, List
 
 
 def generate_mask(image: np.ndarray) -> np.ndarray:
@@ -50,17 +49,18 @@ def fractional_vegetation_cover(ndvi: np.ndarray) -> np.ndarray:
     Returns:
         np.ndarray: Fractional vegetation cover
     """
-    assert len(ndvi.shape) == 2, "NDVI image should be 2-dimensional"
+    if len(ndvi.shape) != 2:
+        raise ValueError("NDVI image should be 2-dimensional")
 
     return ((ndvi - 0.2) / (0.5 - 0.2)) ** 2
 
 
 def cavity_effect(
-    emissivity_veg,
-    emissivity_soil,
-    fractional_vegetation_cover,
-    geometrical_factor=0.55,
-):
+    emissivity_veg: float,
+    emissivity_soil: float,
+    fractional_vegetation_cover: np.ndarray,
+    geometrical_factor: float = 0.55,
+) -> np.ndarray:
     """Compute the cavity effect matrix
 
     Args:
@@ -89,8 +89,8 @@ def rescale_band(
 
     Args:
         image (np.ndarray): Band 1 - 9, or non Thermal IR bands of the satellite image.
-        mult ([type], optional): [description]. Defaults to 2e-05.
-        add (float, optional): [description]. Defaults to 0.1.
+        mult (float, optional): Multiplicative factor. Defaults to 2e-05.
+        add (float, optional): Additive factor. Defaults to 0.1.
 
     Returns:
         np.ndarray: rescaled image of same size as input

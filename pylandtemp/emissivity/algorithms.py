@@ -11,7 +11,7 @@ class Emissivity:
         self.baresoil_ndvi_max = 0.2
         self.vegatation_ndvi_min = 0.5
 
-    def __call__(self, **kwargs):
+    def __call__(self, **kwargs) -> np.ndarray:
         """Computes the emissivity
 
         kwargs:
@@ -90,7 +90,7 @@ class ComputeMonoWindowEmissivity(Emissivity):
     emissivity_soil_11 = None
     emissivity_veg_11 = None
 
-    def _compute_emissivity(self):
+    def _compute_emissivity(self) -> np.ndarray:
 
         emm = np.empty_like(self.ndvi)
 
@@ -123,10 +123,6 @@ class ComputeEmissivityNBEM:
         from Landsat 8 TIRS—Comparison between radiative transfer equation-based method,
         split window algorithm and single channel method." Remote sensing 6.10 (2014): 9829-9852.
 
-
-    Args:
-        ndvi (np.ndarray[float]): Normalized difference vegetation index (NDVI) image matrix
-        red_band (np.ndarray[float]): Red band of image (0.63-0.69 micrometers)
     """
 
     emissivity_soil_10 = 0.9668
@@ -134,13 +130,14 @@ class ComputeEmissivityNBEM:
     emissivity_soil_11 = 0.9747
     emissivity_veg_11 = 0.9896
 
-    def _compute_emissivity(self):
+    def _compute_emissivity(self) -> np.ndarray:
 
-        assert self.red_band is not None, ValueError(
-            "Red band cannot be {} for this emissivity computation method".format(
-                self.red_band
+        if self.red_band is None:
+            raise ValueError(
+                "Red band cannot be {} for this emissivity computation method".format(
+                    self.red_band
+                )
             )
-        )
 
         self.red_band = rescale_band(self.red_band)
 
@@ -213,10 +210,6 @@ class ComputeEmissivityGopinadh(Emissivity):
     Rongali, Gopinadh, et al. "Split-window algorithm for retrieval of land surface temperature
     using Landsat 8 thermal infrared data." Journal of Geovisualization and Spatial Analysis 2.2
     (2018): 1-19.
-
-    Args:
-        ndvi (np.ndarray[float]): Normalized difference vegetation index (NDVI) image matrix
-        red_band (np.ndarray[float]): Red band of image (0.63-0.69 micrometers). Defaults to None.
     """
 
     emissivity_soil_10 = 0.971
@@ -225,7 +218,7 @@ class ComputeEmissivityGopinadh(Emissivity):
     emissivity_soil_11 = 0.977
     emissivity_veg_11 = 0.989
 
-    def _compute_emissivity(self):
+    def _compute_emissivity(self) -> np.ndarray:
 
         fractional_veg_cover = self._compute_fvc()
 

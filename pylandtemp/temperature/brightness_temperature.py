@@ -28,7 +28,7 @@ class BrightnessTemperatureLandsat:
 
 
         Returns:
-            Tuple(np.ndarray(m x n), np.ndarray(m x n)) -> Band 10 brightness temperature, Band 11 brightness temperature
+            Tuple(np.ndarray, np.ndarray) -> Band 10 brightness temperature, Band 11 brightness temperature
         """
         tb_band_10 = self._compute_brightness_temp(
             band_10, self.k1_constant_10, self.k2_constant_10, mask
