@@ -1,20 +1,20 @@
 class Runner:
-    def __init__(self, methods):
+    def __init__(self, algorithms):
         """
         Task and method agnostic runner
 
         args:
-        methods (dict): dictionary that maps defined keys to concrete algorithimic implementations of the called method.
+        algorithms (dict): dictionary that maps defined keys to concrete implementations of the called algorithm.
         """
-        self.methods = methods
+        self.algorithms = algorithms
 
     def __call__(self, method, **kwargs):
-        compute_method = self._get_method(method)
-        return compute_method()(**kwargs)
+        compute_algoirthm = self._get_algorithm(method)
+        return compute_algoirthm()(**kwargs)
 
-    def _get_method(self, method):
-        if method not in self.methods:
+    def _get_algorithm(self, algo):
+        if algo not in self.algorithms:
             raise ValueError(
                 f"Requested method not implemented. Choose among available methods: {list(self.methods.values())}"
             )
-        return self.methods.get(method)
+        return self.algorithms.get(algo)
