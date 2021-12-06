@@ -9,8 +9,8 @@ class Runner:
         self.algorithms = algorithms
 
     def __call__(self, method, **kwargs):
-        compute_algoirthm = self._get_algorithm(method)
-        return compute_algoirthm()(**kwargs)
+        compute_algorithm = self._get_algorithm(method)
+        return compute_algorithm()(**kwargs)
 
     def _get_algorithm(self, algo):
         if algo not in self.algorithms:
