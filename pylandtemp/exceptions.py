@@ -17,7 +17,7 @@ class InvalidMethodRequested(Exception):
     pass
 
 
-def verify_keyword_arguments(keywords, **kwargs):
+def catch_keyword_arguments_exceptions(keywords, **kwargs):
     """
     This method does three things:
 

@@ -1,5 +1,7 @@
 import numpy as np
 
+from pylandtemp.exceptions import catch_keyword_arguments_exceptions
+
 
 class MonoWindowLST:
     def __init__(self):
@@ -36,21 +38,8 @@ class MonoWindowLST:
         Returns:
             np.ndarray: Land surface temperature image
         """
-
-        if "brightness_temperature_10" not in kwargs:
-            raise ValueError(
-                "Keyword arg 'bright_temperature_10' should be provided in input for this LST method"
-            )
-
-        if "emissivity_10" not in kwargs:
-            raise ValueError(
-                "Keyword arg 'emissivity_10' should be provided in input for this LST method"
-            )
-
-        if "mask" not in kwargs:
-            raise ValueError(
-                "Keyword arg 'mask' should be provided in input for this LST method"
-            )
+        required_keywords = ["brightness_temperature_10", "emissivity_10", "mask"]
+        catch_keyword_arguments_exceptions(required_keywords, **kwargs)
 
         temperature_band = kwargs["brightness_temperature_10"]
         emissivity = kwargs["emissivity_10"]
