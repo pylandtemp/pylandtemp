@@ -46,6 +46,18 @@ class SplitWindowJiminezMunozLST(SplitWindowParentLST):
         Returns:
             np.ndarray: Land surface temperature image
         """
+
+        assert_all_keywords_are_provided(
+            [
+                "emissivity_10",
+                "emissivity_11",
+                "brightness_temperature_10",
+                "brightness_temperature_11",
+                "mask",
+            ],
+            **kwargs
+        )
+
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]
         emissivity_10 = kwargs["emissivity_10"]
