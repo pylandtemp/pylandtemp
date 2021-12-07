@@ -24,7 +24,34 @@ class MonoWindowLST:
         return self._compute_lst_mono_window(**kwargs)
 
     def _compute_lst_mono_window(self, **kwargs) -> np.ndarray:
-        """ """
+        """
+        Computes the LST
+
+        kwargs:
+
+        **emissivity_10 (np.ndarray): Emissivity image obtained for band 10
+        **brightness_temperature_10 (np.ndarray): Brightness temperature image obtained for band 10
+        **mask (np.ndarray[bool]): Mask image. Output will have NaN value where mask is True.
+
+        Returns:
+            np.ndarray: Land surface temperature image
+        """
+
+        if "brightness_temperature_10" not in kwargs:
+            raise ValueError(
+                "Keyword arg 'bright_temperature_10' should be provided in input for this LST method"
+            )
+
+        if "emissivity_10" not in kwargs:
+            raise ValueError(
+                "Keyword arg 'emissivity_10' should be provided in input for this LST method"
+            )
+
+        if "mask" not in kwargs:
+            raise ValueError(
+                "Keyword arg 'mask' should be provided in input for this LST method"
+            )
+
         temperature_band = kwargs["brightness_temperature_10"]
         emissivity = kwargs["emissivity_10"]
         mask = kwargs["mask"]
