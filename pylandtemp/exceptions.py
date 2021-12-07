@@ -50,7 +50,7 @@ def ensure_required_all_keywords_are_provided(keywords, **kwargs):
         KeywordArgumentError: custom exception
     """
     for keyword in keywords:
-        if keyword not in kwargs:
+        if keyword not in kwargs or keyword[kwargs] is None:
             message = (
                 f"Keyword argument {keyword} must be provided for this computation "
             )

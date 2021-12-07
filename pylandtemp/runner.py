@@ -1,3 +1,6 @@
+from .exceptions import ensure_requested_method_valid
+
+
 class Runner:
     def __init__(self, algorithms):
         """
@@ -13,8 +16,5 @@ class Runner:
         return compute_algorithm()(**kwargs)
 
     def _get_algorithm(self, algo):
-        if algo not in self.algorithms:
-            raise ValueError(
-                f"Requested method not implemented. Choose among available methods: {list(self.algorithms.values())}"
-            )
+        ensure_requested_method_valid(algo, self.algorithms)
         return self.algorithms[algo]
