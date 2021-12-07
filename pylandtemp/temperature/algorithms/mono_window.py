@@ -56,7 +56,7 @@ class MonoWindowLST:
         emissivity = kwargs["emissivity_10"]
         mask = kwargs["mask"]
 
-        if temperature_band.shape != emissivity.shape:
+        if not (mask.shape == temperature_band.shape == emissivity.shape):
             raise ValueError("Input images must be of the same size/shape")
 
         land_surface_temp = temperature_band / (
