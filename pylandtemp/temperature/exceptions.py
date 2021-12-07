@@ -59,7 +59,8 @@ def ensure_required_all_keywords_are_provided(keywords, **kwargs):
 
 def ensure_mask_is_bool(**kwargs):
     """
-    This method checks the mask variable provided to ensure it's indeed a mask with bool values
+    This method checks the mask variable provided to ensure it's indeed
+        a mask (numpy array) with bool values
 
     Raises:
         InvalidMaskError: custom exception
