@@ -1,6 +1,6 @@
 import numpy as np
 
-from pylandtemp.exceptions import catch_keyword_arguments_exceptions
+from pylandtemp.exceptions import assert_required_keywords_provided
 
 
 class MonoWindowLST:
@@ -39,7 +39,7 @@ class MonoWindowLST:
             np.ndarray: Land surface temperature image
         """
         required_keywords = ["brightness_temperature_10", "emissivity_10", "mask"]
-        catch_keyword_arguments_exceptions(required_keywords, **kwargs)
+        assert_required_keywords_provided(required_keywords, **kwargs)
 
         temperature_band = kwargs["brightness_temperature_10"]
         emissivity = kwargs["emissivity_10"]

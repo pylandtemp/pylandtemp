@@ -1,7 +1,7 @@
 import numpy as np
 
 from pylandtemp.utils import fractional_vegetation_cover
-from pylandtemp.exceptions import catch_keyword_arguments_exceptions
+from pylandtemp.exceptions import assert_required_keywords_provided
 
 
 class SplitWindowParentLST:
@@ -55,7 +55,7 @@ class SplitWindowJiminezMunozLST(SplitWindowParentLST):
             "brightness_temperature_11",
             "mask",
         ]
-        catch_keyword_arguments_exceptions(required_keywords, **kwargs)
+        assert_required_keywords_provided(required_keywords, **kwargs)
 
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]
@@ -110,7 +110,7 @@ class SplitWindowKerrLST(SplitWindowParentLST):
             "brightness_temperature_11",
             "mask",
         ]
-        catch_keyword_arguments_exceptions(required_keywords, **kwargs)
+        assert_required_keywords_provided(required_keywords, **kwargs)
 
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]
@@ -155,7 +155,7 @@ class SplitWindowMcMillinLST(SplitWindowParentLST):
             "brightness_temperature_11",
             "mask",
         ]
-        catch_keyword_arguments_exceptions(required_keywords, **kwargs)
+        assert_required_keywords_provided(required_keywords, **kwargs)
 
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]
@@ -196,7 +196,7 @@ class SplitWindowPriceLST(SplitWindowParentLST):
             "brightness_temperature_11",
             "mask",
         ]
-        catch_keyword_arguments_exceptions(required_keywords, **kwargs)
+        assert_required_keywords_provided(required_keywords, **kwargs)
 
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]
@@ -242,7 +242,7 @@ class SplitWindowSobrino1993LST(SplitWindowParentLST):
             "brightness_temperature_11",
             "mask",
         ]
-        catch_keyword_arguments_exceptions(required_keywords, **kwargs)
+        assert_required_keywords_provided(required_keywords, **kwargs)
 
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]

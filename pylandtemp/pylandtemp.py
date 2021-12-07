@@ -5,6 +5,7 @@ from pylandtemp.emissivity import default_algorithms as emissivity_algorithms
 from pylandtemp.temperature import BrightnessTemperatureLandsat
 from pylandtemp.runner import Runner
 from pylandtemp.utils import compute_ndvi
+from pylandtemp.exceptions import *
 
 
 def split_window(
@@ -102,6 +103,12 @@ def single_window(
     Returns:
         np.ndarray: Land surface temperature (numpy array)
     """
+
+    if not landsat_band_10.shape == landsat_band_5.shape == landsat_band_4.shape:
+        raise InputShapesNotEqual(
+            "Shapes of input images should be equal: {landsat_band_10.shape}, {landsat_band_5.shape}, {landsat_band_4.shape}"
+        )
+
     mask = landsat_band_10 == 0
     ndvi_image = ndvi(landsat_band_5, landsat_band_4, mask)
     brightness_temp_10, _ = brightness_temperature(landsat_band_10, mask=mask)
@@ -143,9 +150,13 @@ def emissivity(
     Returns:
         np.ndarray: Emissivity numpy array
     """
+    if not ndvi_image.shape == landsat_band_4.shape:
+        raise InputShapesNotEqual(
+            "Shapes of input images should be equal: {ndvi_image.shape}, {landsat_band_4.shape}"
+        )
     if emissivity_method == "xiaolei" and landsat_band_4 is None:
         raise ValueError(
-            f"The red band has to be provided if {emissivity_method} is to be used"
+            f"The red band (landsat_band_4) has to be provided if {emissivity_method} is to be used"
         )
 
     emissivity_10, emissivity_11 = Runner(algorithms=emissivity_algorithms)(
@@ -165,6 +176,15 @@ def ndvi(landsat_band_5: np.ndarray, landsat_band_4: np.ndarray, mask: np.ndarra
     Returns:
         np.ndarray: NVDI numpy array
     """
+    if not landsat_band_5.shape == landsat_band_4.shape:
+        raise InputShapesNotEqual(
+            "Shapes of input images should be equal: {landsat_band_5.shape}, {landsat_band_4.shape}"
+        )
+
+    if mask.dtype != "bool":
+        raise InvalidMaskError(
+            "image passed in as 'mask' must be a numpy array with bool dtype values"
+        )
     return compute_ndvi(landsat_band_5, landsat_band_4, mask=mask)
 
 
@@ -183,6 +203,16 @@ def brightness_temperature(
     Returns:
         np.ndarray: Brightness temperature numpy array
     """
+    if not landsat_band_10.shape == landsat_band_11.shape:
+        raise InputShapesNotEqual(
+            "Shapes of input images should be equal: {landsat_band_10.shape}, {landsat_band_11.shape}"
+        )
+
+    if mask.dtype != "bool":
+        raise InvalidMaskError(
+            "image passed in as 'mask' must be a numpy array with bool dtype values"
+        )
+
     brightness_temp_10, brightness_temp_11 = BrightnessTemperatureLandsat()(
         landsat_band_10, landsat_band_11, mask=mask
     )
