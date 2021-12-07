@@ -52,11 +52,11 @@ def split_window(
         landsat_band_10, landsat_band_11=landsat_band_11, mask=mask
     )
 
-    emissivity_10, emissivity_11 = Runner(methods=emissivity_algorithms)(
+    emissivity_10, emissivity_11 = Runner(algorithms=emissivity_algorithms)(
         emissivity_method, ndvi=ndvi_image, red_band=landsat_band_4
     )
 
-    lst_image = Runner(methods=temperature_algorithms.split_window)(
+    lst_image = Runner(algorithms=temperature_algorithms.split_window)(
         lst_method,
         emissivity_10=emissivity_10,
         emissivity_11=emissivity_11,
@@ -84,7 +84,7 @@ def single_window(
         landsat_band_4 (np.ndarray): Band 4 of the Landsat 8 image (Red band)
         landsat_band_5 (np.ndarray): Band 4 of the Landsat 8 image (Near-Infrared band)
 
-        lst_method (str, optional): [description]. Defaults to 'mono-window'.
+        lst_method (str, optional): Defaults to 'mono-window'.
                                     Valid methods to add include:
                                     'mono-window': Avdan Ugur et al, 2016
 
@@ -105,13 +105,12 @@ def single_window(
     mask = landsat_band_10 == 0
     ndvi_image = ndvi(landsat_band_5, landsat_band_4, mask)
     brightness_temp_10, _ = brightness_temperature(landsat_band_10, mask=mask)
-    # emissivity_10, _ = Emissivity(ndvi_image, landsat_band_4)(emissivity_method)
 
-    emissivity_10, _ = Runner(methods=emissivity_algorithms)(
+    emissivity_10, _ = Runner(algorithms=emissivity_algorithms)(
         emissivity_method, ndvi=ndvi_image, red_band=landsat_band_4
     )
 
-    lst_image = Runner(methods=temperature_algorithms.single_window)(
+    lst_image = Runner(algorithms=temperature_algorithms.single_window)(
         lst_method,
         emissivity_10=emissivity_10,
         brightness_temperature_10=brightness_temp_10,
@@ -149,7 +148,7 @@ def emissivity(
             f"The red band has to be provided if {emissivity_method} is to be used"
         )
 
-    emissivity_10, emissivity_11 = Runner(methods=emissivity_algorithms)(
+    emissivity_10, emissivity_11 = Runner(algorithms=emissivity_algorithms)(
         emissivity_method, ndvi=ndvi_image, red_band=landsat_band_4
     )
     return emissivity_10, emissivity_11

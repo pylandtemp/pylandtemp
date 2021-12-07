@@ -105,7 +105,7 @@ class ComputeMonoWindowEmissivity(Emissivity):
         return emm, emm
 
 
-class ComputeEmissivityNBEM:
+class ComputeEmissivityNBEM(Emissivity):
     """
     Method references:
 
