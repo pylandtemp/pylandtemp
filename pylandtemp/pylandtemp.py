@@ -46,6 +46,17 @@ def split_window(
     Returns:
         np.ndarray: Land surface temperature (numpy array)
     """
+
+    if not (
+        landsat_band_10.shape
+        == landsat_band_10.shape
+        == landsat_band_5.shape
+        == landsat_band_4.shape
+    ):
+        raise InputShapesNotEqual(
+            f"Shapes of input images should be equal: {landsat_band_10.shape}, {landsat_band_5.shape}, {landsat_band_4.shape}"
+        )
+
     mask = landsat_band_10 == 0
     ndvi_image = ndvi(landsat_band_5, landsat_band_4, mask)
 
@@ -106,7 +117,7 @@ def single_window(
 
     if not landsat_band_10.shape == landsat_band_5.shape == landsat_band_4.shape:
         raise InputShapesNotEqual(
-            "Shapes of input images should be equal: {landsat_band_10.shape}, {landsat_band_5.shape}, {landsat_band_4.shape}"
+            f"Shapes of input images should be equal: {landsat_band_10.shape}, {landsat_band_5.shape}, {landsat_band_4.shape}"
         )
 
     mask = landsat_band_10 == 0
@@ -152,7 +163,7 @@ def emissivity(
     """
     if not ndvi_image.shape == landsat_band_4.shape:
         raise InputShapesNotEqual(
-            "Shapes of input images should be equal: {ndvi_image.shape}, {landsat_band_4.shape}"
+            f"Shapes of input images should be equal: {ndvi_image.shape}, {landsat_band_4.shape}"
         )
     if emissivity_method == "xiaolei" and landsat_band_4 is None:
         raise ValueError(
@@ -178,12 +189,12 @@ def ndvi(landsat_band_5: np.ndarray, landsat_band_4: np.ndarray, mask: np.ndarra
     """
     if not landsat_band_5.shape == landsat_band_4.shape:
         raise InputShapesNotEqual(
-            "Shapes of input images should be equal: {landsat_band_5.shape}, {landsat_band_4.shape}"
+            f"Shapes of input images should be equal: {landsat_band_5.shape}, {landsat_band_4.shape}"
         )
 
     if mask.dtype != "bool":
         raise InvalidMaskError(
-            "image passed in as 'mask' must be a numpy array with bool dtype values"
+            f"image passed in as 'mask' must be a numpy array with bool dtype values"
         )
     return compute_ndvi(landsat_band_5, landsat_band_4, mask=mask)
 
@@ -205,12 +216,12 @@ def brightness_temperature(
     """
     if not landsat_band_10.shape == landsat_band_11.shape:
         raise InputShapesNotEqual(
-            "Shapes of input images should be equal: {landsat_band_10.shape}, {landsat_band_11.shape}"
+            f"Shapes of input images should be equal: {landsat_band_10.shape}, {landsat_band_11.shape}"
         )
 
     if mask.dtype != "bool":
         raise InvalidMaskError(
-            "image passed in as 'mask' must be a numpy array with bool dtype values"
+            f"image passed in as 'mask' must be a numpy array with bool dtype values"
         )
 
     brightness_temp_10, brightness_temp_11 = BrightnessTemperatureLandsat()(
