@@ -1,6 +1,7 @@
 import numpy as np
 
 from pylandtemp.utils import fractional_vegetation_cover
+from pylandtemp.exceptions import catch_keyword_arguments_exceptions
 
 
 class SplitWindowParentLST:
@@ -47,16 +48,14 @@ class SplitWindowJiminezMunozLST(SplitWindowParentLST):
             np.ndarray: Land surface temperature image
         """
 
-        assert_all_keywords_are_provided(
-            [
-                "emissivity_10",
-                "emissivity_11",
-                "brightness_temperature_10",
-                "brightness_temperature_11",
-                "mask",
-            ],
-            **kwargs
-        )
+        required_keywords = [
+            "emissivity_10",
+            "emissivity_11",
+            "brightness_temperature_10",
+            "brightness_temperature_11",
+            "mask",
+        ]
+        catch_keyword_arguments_exceptions(required_keywords, **kwargs)
 
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]
@@ -105,6 +104,14 @@ class SplitWindowKerrLST(SplitWindowParentLST):
         Returns:
             np.ndarray: Land surface temperature image
         """
+
+        required_keywords = [
+            "brightness_temperature_10",
+            "brightness_temperature_11",
+            "mask",
+        ]
+        catch_keyword_arguments_exceptions(required_keywords, **kwargs)
+
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]
         ndvi = kwargs["ndvi"]
@@ -143,6 +150,13 @@ class SplitWindowMcMillinLST(SplitWindowParentLST):
         Returns:
             np.ndarray: Land surface temperature image
         """
+        required_keywords = [
+            "brightness_temperature_10",
+            "brightness_temperature_11",
+            "mask",
+        ]
+        catch_keyword_arguments_exceptions(required_keywords, **kwargs)
+
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]
         mask = kwargs["mask"]
@@ -175,6 +189,15 @@ class SplitWindowPriceLST(SplitWindowParentLST):
         Returns:
             np.ndarray: Land surface temperature image
         """
+        required_keywords = [
+            "emissivity_10",
+            "emissivity_11",
+            "brightness_temperature_10",
+            "brightness_temperature_11",
+            "mask",
+        ]
+        catch_keyword_arguments_exceptions(required_keywords, **kwargs)
+
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]
         emm_10 = kwargs["emissivity_10"]
@@ -212,6 +235,15 @@ class SplitWindowSobrino1993LST(SplitWindowParentLST):
         Returns:
             np.ndarray: Land surface temperature image
         """
+        required_keywords = [
+            "emissivity_10",
+            "emissivity_11",
+            "brightness_temperature_10",
+            "brightness_temperature_11",
+            "mask",
+        ]
+        catch_keyword_arguments_exceptions(required_keywords, **kwargs)
+
         tb_10 = kwargs["brightness_temperature_10"]
         tb_11 = kwargs["brightness_temperature_11"]
         emm_10 = kwargs["emissivity_10"]
