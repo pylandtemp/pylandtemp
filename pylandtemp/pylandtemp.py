@@ -204,7 +204,7 @@ def brightness_temperature(
     landsat_band_11: np.ndarray = None,
     mask: np.ndarray = None,
 ):
-    """[summary]
+    """Compute brightness temperature
 
     Args:
         landsat_band_10 (np.ndarray): Band 10 of landsat 8 image
