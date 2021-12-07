@@ -1,6 +1,6 @@
 import numpy as np
 
-from pylandtemp.temperature.exceptions import catch_keyword_arguments_exceptions
+from pylandtemp.exceptions import catch_keyword_arguments_exceptions
 
 
 class MonoWindowLST:

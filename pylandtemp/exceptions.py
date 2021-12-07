@@ -2,18 +2,26 @@ import numpy as np
 
 
 class InvalidMaskError(Exception):
+    """Invalid mask error"""
+
     pass
 
 
 class KeywordArgumentError(Exception):
+    """Required keyword argument missing"""
+
     pass
 
 
 class InputShapesNotEqual(Exception):
+    """Input images don't have the same shape"""
+
     pass
 
 
 class InvalidMethodRequested(Exception):
+    """Invalid method/algorithm requested"""
+
     pass
 
 
@@ -90,20 +98,3 @@ def ensure_images_are_same_shape(**kwargs):
                 if base_shape != variable_shape:
                     message = f"Input images should be of same shape. {base_shape}, {variable_shape}"
                     raise InputShapesNotEqual(message)
-
-
-def ensure_requested_method_valid(algo, algorithms):
-    """
-    This function checks that the requested algorithm in available in the package
-
-    Args:
-        algo (str): requested algorithm
-        algorithms (dict): available algorithms with "key: implementation class" map
-
-    Raises:
-        InvalidMethodRequested: custom exception
-    """
-
-    if algo not in algorithms:
-        message = "You can only request the following methods: {algorithms.keys()}"
-        raise InvalidMethodRequested(message)

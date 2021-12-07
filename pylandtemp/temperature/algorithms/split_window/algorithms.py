@@ -1,7 +1,7 @@
 import numpy as np
 
 from pylandtemp.utils import fractional_vegetation_cover
-from pylandtemp.temperature.exceptions import catch_keyword_arguments_exceptions
+from pylandtemp.exceptions import catch_keyword_arguments_exceptions
 
 
 class SplitWindowParentLST:
