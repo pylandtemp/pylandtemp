@@ -34,14 +34,6 @@ All kinds of contributions are welcome --- development of enhancements, bug fixe
 
 A guide to get you started with contributing to pylandtemp is available [here]().
 
-```
-@Misc{pylandtemp,
-author =       {Oladimeji Mudele},
-title =        {pylandtemp - a Python tool for retrieving land surface temperature from Landsat 8 satellite imagery},
-howpublished = {Github},
-year =         {2021},
-url =          {https://github.com/pylandtemp}
-}
-```
+
 
 
