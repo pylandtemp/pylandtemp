@@ -11,8 +11,8 @@ setup(
     description="Compute land surface temperature(LST) from Landsat-8 data",
     author="Oladimeji Mudele",
     license="Apache 2.0",
-    long_description=long_description,
     long_description_content_type="text/markdown",
+    long_description=long_description,
     url="https://github.com/pylandtemp/pylandtemp",
     install_requires=[
         "numpy",
