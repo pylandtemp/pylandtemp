@@ -42,7 +42,7 @@ def assert_required_keywords_provided(keywords, **kwargs):
         KeywordArgumentError: custom exception
     """
     for keyword in keywords:
-        if keyword not in kwargs or keyword[kwargs] is None:
+        if keyword not in kwargs or kwargs[keyword] is None:
             message = (
                 f"Keyword argument {keyword} must be provided for this computation "
             )

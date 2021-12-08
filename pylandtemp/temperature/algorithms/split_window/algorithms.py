@@ -108,6 +108,7 @@ class SplitWindowKerrLST(SplitWindowParentLST):
         required_keywords = [
             "brightness_temperature_10",
             "brightness_temperature_11",
+            "ndvi",
             "mask",
         ]
         assert_required_keywords_provided(required_keywords, **kwargs)

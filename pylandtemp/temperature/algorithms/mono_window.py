@@ -10,6 +10,7 @@ class MonoWindowLST:
         Avdan, Ugur, and Gordana Jovanovska. "Algorithm for automated mapping of land surface
         temperature using LANDSAT 8 satellite data." Journal of sensors 2016 (2016).
         """
+        self.max_earth_temp = 273.15 + 56.7
 
     def __call__(self, **kwargs) -> np.ndarray:
         """
@@ -23,7 +24,10 @@ class MonoWindowLST:
         Returns:
             np.ndarray: Land surface temperature image
         """
-        return self._compute_lst_mono_window(**kwargs)
+
+        lst = self._compute_lst_mono_window(**kwargs)
+        lst[lst > self.max_earth_temp] = np.nan
+        return lst
 
     def _compute_lst_mono_window(self, **kwargs) -> np.ndarray:
         """
