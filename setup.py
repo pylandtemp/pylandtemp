@@ -1,7 +1,9 @@
 from setuptools import setup
+import pathlib
 
-with open("./README.md", "r", encoding="utf-8") as fh:
-    long_description = fh.read()
+here = pathlib.Path(__file__).parent.resolve()
+long_description = (here / "README.md").read_text(encoding="utf-8")
+
 setup(
     name="pylandtemp",
     packages=["pylandtemp"],
@@ -11,9 +13,10 @@ setup(
     license="Apache 2.0",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    include_package_data=True,
     url="https://github.com/pylandtemp/pylandtemp",
     install_requires=[
         "numpy",
     ],
+    keywords="sample, setuptools, development",
+    package_dir={"": "pylandtemp"},
 )
