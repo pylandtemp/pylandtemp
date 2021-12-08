@@ -49,7 +49,7 @@ def split_window(
 
     if not (
         landsat_band_10.shape
-        == landsat_band_10.shape
+        == landsat_band_11.shape
         == landsat_band_5.shape
         == landsat_band_4.shape
     ):
@@ -214,7 +214,10 @@ def brightness_temperature(
     Returns:
         np.ndarray: Brightness temperature numpy array
     """
-    if not landsat_band_10.shape == landsat_band_11.shape:
+    if (
+        landsat_band_11 is not None
+        and not landsat_band_10.shape == landsat_band_11.shape
+    ):
         raise InputShapesNotEqual(
             f"Shapes of input images should be equal: {landsat_band_10.shape}, {landsat_band_11.shape}"
         )
