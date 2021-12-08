@@ -20,7 +20,7 @@ jobs:
         echo $CONDA/bin >> $GITHUB_PATH
     - name: Install dependencies
       run: |
-        conda env update --file environment.yml --name base
+        $CONDA/bin/conda env update --file environment.yml --name base
     - name: Lint with flake8
       run: |
         conda install flake8
@@ -30,4 +30,5 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test
       run: |
-        python -m unittest
+        conda install pytest
+        pytest
