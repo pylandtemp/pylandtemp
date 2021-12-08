@@ -19,4 +19,12 @@ setup(
     ],
     keywords="sample, setuptools, development",
     package_dir={"": "pylandtemp"},
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Education",
+        "Topic :: Software Development :: Build Tools",
+        "License :: OSI Approved :: Apache License",
+        "Programming Language :: Python :: 3.8",
+    ],
+    python_requires=">=3.8",
 )
