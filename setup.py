@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 import pathlib
 
 here = pathlib.Path(__file__).parent.resolve()
@@ -6,7 +6,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="pylandtemp",
-    packages=["pylandtemp"],
+    packages=find_packages(exclude=["test"]),
     version="1.1.0",
     description="Compute land surface temperature(LST) from Landsat-8 data",
     author="Oladimeji Mudele",
