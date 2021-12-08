@@ -1,8 +1,8 @@
 from setuptools import setup
 import pathlib
 
-here = pathlib.Path(__file__).parent.resolve()
-long_description = (here / "README.md").read_text(encoding="utf-8")
+# here = pathlib.Path(__file__).parent.resolve()
+# long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="pylandtemp",
@@ -12,7 +12,7 @@ setup(
     author="Oladimeji Mudele",
     license="Apache 2.0",
     # long_description_content_type="text/markdown",
-    # long_description=long_description,
+    long_description="https://github.com/pylandtemp/pylandtemp",
     url="https://github.com/pylandtemp/pylandtemp",
     install_requires=[
         "numpy",
