@@ -1,21 +1,19 @@
 import numpy as np
-import pytest
+import unittest
 
-from .pylandtemp.temperature.brightness_temperature import BrightnessTemperatureLandsat
-
-
-@pytest.fixture
-def brightness_temp_output():
-    """returns the __call__ output of BrightnessTemperatureLandsat class"""
-    sample_band_10 = np.zeros(5, 5)
-    out = BrightnessTemperatureLandsat()(sample_band_10)
-
-    return out
+from pylandtemp.temperature import BrightnessTemperatureLandsat
 
 
-def test_output_type(brightness_temp_output):
-    assert type(brightness_temp_output()) == tuple
+class TestBrightnessTemoperature(unittest.TestCase):
+    sample_band_10 = np.zeros((5, 5))
+    output = BrightnessTemperatureLandsat()(sample_band_10)
+
+    def test_that_method_returns_tuple(self):
+        self.assertIsInstance(self.output, tuple)
+
+    def test_that_output_and_input_size_equel(self):
+        self.assertEqual(self.sample_band_10.shape, self.output[0].shape)
 
 
-def test_output_size(brightness_temp_output):
-    assert brightness_temp_output().shape == (5, 5)
+if __name__ == "__main__":
+    unittest.main()
