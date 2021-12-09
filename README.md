@@ -14,10 +14,11 @@ Even though only Landsat 8 images are currently 'officially' supported, the meth
 
 
 ## What's new:
+- ***December 2021***: version 0.0.1-alpha.1 pre-release version is out on PYPI. Find it [here](https://pypi.org/project/pylandtemp/) 
 - ***December 2021***: Implementing tutorial notebooks based on the different methods. Find them [here](https://github.com/pylandtemp/pylandtemp/tree/master/tutorials)
 
 
-## Installation
+## Installation: PYPI
 
 `pip install pylandtemp`
 
@@ -32,7 +33,7 @@ The notebooks [here](https://github.com/pylandtemp/pylandtemp/tree/master/tutori
 
 All kinds of contributions are welcome --- development of enhancements, bug fixes, documentation, tutorial notebooks, new methods, new data, etc.... 
 
-A guide to get you started with contributing to pylandtemp is available [here]().
+A guide to get you started with contributing will soon be made available.
 
 ```
 @Misc{pylandtemp,
