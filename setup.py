@@ -6,18 +6,19 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 setup(
     name="pylandtemp",
-    version="1.1.1",
+    version="0.0.1-alpha.1",
     description="Compute land surface temperature(LST) from Landsat-8 data",
     author="Oladimeji Mudele",
     license="Apache",
     long_description_content_type="text/markdown",
     long_description=long_description,
     url="https://github.com/pylandtemp/pylandtemp",
-    packages=["pylandtemp", "emissivity", "temperature"],
+    # packages=["pylandtemp", "emissivity", "temperature"],
+    packages=find_packages(),
     install_requires=[
         "numpy",
     ],
-    keywords="sample, setuptools, development",
+    keywords="Image processing, Landsat, Satellite images",
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Education",
