@@ -14,7 +14,7 @@ Even though only Landsat 8 images are currently 'officially' supported, the meth
 
 
 ## What's new:
-- ***December 2021***: version 0.0.1-alpha.1 pre-release version is out on PYPI. Find it [here](https://pypi.org/project/pylandtemp/) 
+- ***December 2021***: version 0.0.1-alpha.1 pre-release version is out on PyPI. Find it [here](https://pypi.org/project/pylandtemp/) 
 - ***December 2021***: Implementing tutorial notebooks based on the different methods. Find them [here](https://github.com/pylandtemp/pylandtemp/tree/master/tutorials)
 
 
