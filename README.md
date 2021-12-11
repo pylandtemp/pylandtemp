@@ -18,7 +18,7 @@ Even though only Landsat 8 images are currently 'officially' supported, the meth
 - ***December 2021***: Implementing tutorial notebooks based on the different methods. Find them [here](https://github.com/pylandtemp/pylandtemp/tree/master/tutorials)
 
 
-## Installation: PYPI
+## Installation: PyPI
 
 `pip install pylandtemp`
 
