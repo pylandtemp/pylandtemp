@@ -30,7 +30,7 @@ def split_window(
                         Valid methods to add include:
                         'jiminez-munoz': Jiminez-Munoz et al, 2014
                         'kerr': Kerr Y et al, 2004
-                        'mc-millin': McMillin L. M. , 1975
+                        'mc-clain': McClain et al. , 1985
                         'price': Price J. C., 1984
                         'sobrino-1993': Sobrino J. A. et al, 1993
                         'coll-caselles': Coll C. et al, 1997

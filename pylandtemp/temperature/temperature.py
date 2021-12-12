@@ -4,7 +4,7 @@ from .algorithms.mono_window import MonoWindowLST
 from .algorithms.split_window.algorithms import (
     SplitWindowJiminezMunozLST,
     SplitWindowKerrLST,
-    SplitWindowMcMillinLST,
+    SplitWindowMcClainLST,
     SplitWindowPriceLST,
     SplitWindowSobrino1993LST,
 )
@@ -15,7 +15,7 @@ single_window = {"mono-window": MonoWindowLST}
 split_window = {
     "jiminez-munoz": SplitWindowJiminezMunozLST,
     "kerr": SplitWindowKerrLST,
-    "mc-millin": SplitWindowMcMillinLST,
+    "mc-clain": SplitWindowMcClainLST,
     "price": SplitWindowPriceLST,
     "sobrino-1993": SplitWindowSobrino1993LST,
 }

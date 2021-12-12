@@ -30,7 +30,7 @@ Even though only Landsat 8 images are currently 'officially' supported, the meth
 ----------------
 |[Jiminez-Munoz et al, 2014](https://ieeexplore.ieee.org/abstract/document/6784508/?casa_token=A6cR6LeSSuoAAAAA:eFg3nxZvDTJpEBhvAmOwwJxo9rWy-y3aTdnArzEfbtM1UWUbBLhG9NhmeiQstFLTY8jbsT7x)| 'jiminez-munoz' |
 |https://www.sciencedirect.com/science/article/abs/pii/003442579290078X|'kerr'|
-|||
+||'mc-clain'|
 
 ## How to start using pylandtemp
 The notebooks [here](https://github.com/pylandtemp/pylandtemp/tree/master/tutorials) are a good place to start.

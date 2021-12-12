@@ -129,7 +129,7 @@ class SplitWindowKerrLST(SplitWindowParentLST):
         return lst
 
 
-class SplitWindowMcMillinLST(SplitWindowParentLST):
+class SplitWindowMcClainLST(SplitWindowParentLST):
     """
     Method reference:
 
