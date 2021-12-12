@@ -28,7 +28,7 @@ def split_window(
 
         lst_method (str): provide one of the valid split window method for computing land surface temperature
                         Valid methods to add include:
-                        'jiminez-munoz': Jiminez-Munoz et al, 2008
+                        'jiminez-munoz': Jiminez-Munoz et al, 2014
                         'kerr': Kerr Y et al, 2004
                         'mc-millin': McMillin L. M. , 1975
                         'price': Price J. C., 1984
