@@ -27,7 +27,7 @@ Even though only Landsat 8 images are currently 'officially' supported, the meth
 
 #### Land surface temperature --- Split window (`pylandtemp.split_window(...)`)
 | Algorithm|key|
-----------------
+|----------|---|
 |[Jiminez-Munoz et al. (2014)](https://ieeexplore.ieee.org/abstract/document/6784508/?casa_token=A6cR6LeSSuoAAAAA:eFg3nxZvDTJpEBhvAmOwwJxo9rWy-y3aTdnArzEfbtM1UWUbBLhG9NhmeiQstFLTY8jbsT7x)| 'jiminez-munoz' |
 |[Coll C. et al. (1997)](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/97JD00929)|'coll-caselles'|
 |[Sobrino et al. (1993)](https://link.springer.com/content/pdf/10.1007/BF02524225.pdf)|'sobrino-1993'|
@@ -38,12 +38,12 @@ Even though only Landsat 8 images are currently 'officially' supported, the meth
 #### Land surface temperature --- Single window (`pylandtemp.single_window(...)`)
 
 | Algorithm|key|
-----------------
+|----------|---|
 |[Ugur Avdan et al. (2014)](https://www.hindawi.com/journals/js/2016/1480307/)| 'mono-window' |
 
 #### Land surface emissivity (`pylandtemp.emissivity(...)`)
 | Algorithm|key|
-----------------
+|----------|---|
 |[Gopinadh Rongali et al. (2018)](https://www.researchgate.net/publication/327461405_Split-Window_Algorithm_for_Retrieval_of_Land_Surface_Temperature_Using_Landsat_8_Thermal_Infrared_Data)| 'gopinadh' |
 |[Ugur Avdan et al. (2014)](https://www.hindawi.com/journals/js/2016/1480307/)| 'advan' |
 |[Xiaolei Yu et al. (2014)](https://www.mdpi.com/2072-4292/6/10/9829)| 'xiaolei' |
