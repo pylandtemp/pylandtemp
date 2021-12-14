@@ -50,9 +50,9 @@ A guide to get you started with contributing will soon be made available.
 @Misc{pylandtemp,
 author = {Oladimeji Mudele},
 title =        {pylandtemp - a Python tool for retrieving land surface temperature from Landsat 8 satellite imagery},
-howpublished = {Github},
+howpublished = {GitHub},
 year =         {2021},
-url =          {https://github.com/pylandtemp}
+url =          {https://github.com/pylandtemp/pylandtemp}
 }
 ```
 
