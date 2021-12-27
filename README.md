@@ -7,10 +7,10 @@
 
 ## Description
 
-**pylandtemp** is a Python tool for retrieving land surface temperature from NASA's [Landsat](https://www.usgs.gov/landsat-missions) satellite imagery using the mono-window and split-window techniques in literature.
+**pylandtemp** is a Python library that provides interfaces for different algorithms for computing land surface temperature from NASA's [Landsat](https://www.usgs.gov/landsat-missions) satellite imagery. Both mono-window and split-window techniques in literature are covered in this.
 Additionally, it also provides multiple methods for computing land surface emissivity. It is targeted towards supporting research and science workflows in many fields including climate science, earth sciences, remote sensing, geospatial data science, environmental studies, among others.
 
-Even though only Landsat 8 images are currently 'officially' supported, the methods available via this Python tool can be applied to other dataset including ASTER and MODIS.
+Even though only Landsat images are currently 'officially' supported, the methods available via this Python tool can be applied to other dataset including ASTER and MODIS.
 
 
 ## What's new:
