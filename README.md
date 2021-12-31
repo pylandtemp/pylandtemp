@@ -65,10 +65,17 @@ All kinds of contributions are welcome --- development of enhancements, bug fixe
 
 A guide to get you started with contributing will soon be made available.
 
+## How to cite
+
+```
+Mudele, O., (2021). pylandtemp: A Python package for computing land surface temperature from Landsat satellite imagery. GitHub: https://github.com/pylandtemp/pylandtemp.
+```
+
+If preferred, here is the BibTex:
 ```
 @Misc{pylandtemp,
 author = {Oladimeji Mudele},
-title =        {pylandtemp - a Python tool for computing land surface temperature from Landsat satellite imagery},
+title =        {pylandtemp: A Python package for computing land surface temperature from Landsat satellite imagery},
 howpublished = {GitHub},
 year =         {2021},
 url =          {https://github.com/pylandtemp/pylandtemp}
