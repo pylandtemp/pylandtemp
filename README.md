@@ -15,9 +15,9 @@ Even though only Landsat images are currently 'officially' supported, the method
 
 ## What's new:
 - ***December 2021***: version 0.0.1-alpha.1 pre-release version is out on PyPI. Find it [here](https://pypi.org/project/pylandtemp/) 
-- ***December 2021***: Implementing tutorial notebooks based on the different methods. Find them [here](https://github.com/pylandtemp/pylandtemp/tree/master/tutorials)
+- ***December 2021***: Implemented tutorial notebooks based on the different methods. Find them [here](https://github.com/pylandtemp/pylandtemp/tree/master/tutorials)
 
-
+- ***November 2021***: Implemented a runner for dynamic dispatch.
 ## Installation: PyPI
 
 `pip install pylandtemp`
