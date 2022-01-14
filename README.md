@@ -12,15 +12,11 @@ Additionally, it also provides multiple methods for computing land surface emiss
 
 Even though only Landsat images are currently 'officially' supported, the methods available via this Python tool can be applied to other dataset including ASTER and MODIS.
 
+## Installation
 
-## What's new:
-- ***December 2021***: version 0.0.1-alpha.1 pre-release version is out on PyPI. Find it [here](https://pypi.org/project/pylandtemp/) 
-- ***December 2021***: Implemented tutorial notebooks based on the different methods. Find them [here](https://github.com/pylandtemp/pylandtemp/tree/master/tutorials)
-- ***November 2021***: Implemented a runner for dynamic dispatch.
-## Installation: PyPI
+The pylandtemp Python package is available through (PyPI)[https://pypi.org/project/pylandtemp/]:
 
 `pip install pylandtemp`
-
 
 ## Supported algorithms
 
@@ -63,6 +59,14 @@ The notebooks [here](https://github.com/pylandtemp/pylandtemp/tree/master/tutori
 All kinds of contributions are welcome --- development of enhancements, bug fixes, documentation, tutorial notebooks, new methods, new data, etc.... 
 
 A guide to get you started with contributing will soon be made available.
+
+## What's new:
+- ***December 2021***: version 0.0.1-alpha.1 pre-release version is out on PyPI. Find it [here](https://pypi.org/project/pylandtemp/) 
+- ***December 2021***: Implemented tutorial notebooks based on the different methods. Find them [here](https://github.com/pylandtemp/pylandtemp/tree/master/tutorials)
+- ***November 2021***: Implemented a runner for dynamic dispatch.
+
+
+
 
 ## How to cite
 
