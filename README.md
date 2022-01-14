@@ -18,7 +18,9 @@ The pylandtemp Python package is available through (PyPI)[https://pypi.org/proje
 
 `pip install pylandtemp`
 
-## Supported algorithms
+## Documentation
+
+### Supported algorithms
 
 #### Land surface temperature --- Split window 
 `pylandtemp.split_window(...)`
@@ -49,7 +51,7 @@ The pylandtemp Python package is available through (PyPI)[https://pypi.org/proje
 
 
 
-## How to start using pylandtemp
+## Tutorials
 The notebooks [here](https://github.com/pylandtemp/pylandtemp/tree/master/tutorials) are a good place to start.
 
 
