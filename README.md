@@ -51,7 +51,7 @@ To compute land surface temperature using [Jiminez-Munoz et al. (2014)](https://
 import numpy as np
 from pylandtemp import split_window
 
-# lst_method and emissivity_method are keys pointing to the chosen algorithms you want to you.
+# lst_method and emissivity_method should point to keys of chosen algorithms for temeprature and emmisivity, respectively
 # Keys for available algorithms are presented in the next section
 
 # tempImage10 is a numpy array of band 10 brightness temperature 
@@ -69,7 +69,7 @@ lst_image_split_window = split_window(
     unit='celcius'
 )
 
-# The function returns a numpy array which is the LST
+# The function returns a numpy array which is the land surface temperature image.
 ```
 
 
@@ -122,7 +122,6 @@ A guide to get you started with contributing will soon be made available.
 ## Code license 
 
 The code of this library is available under the [MIT license](https://fossa.com/blog/open-source-licenses-101-apache-license-2-0/).
-
 
 
 ## How to cite
