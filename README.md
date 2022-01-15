@@ -16,7 +16,7 @@ Even though only Landsat images are currently 'officially' supported, the method
 
 ## Installation
 
-The pylandtemp Python package is available through (PyPI)[https://pypi.org/project/pylandtemp/]:
+The pylandtemp Python package is available through [PyPI](https://pypi.org/project/pylandtemp/):
 
 ```
 pip install pylandtemp
