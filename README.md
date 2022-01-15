@@ -128,7 +128,7 @@ The code of this library is available under the [Apache 2.0 license](https://fos
 
 ## Sponsor
 
-github: dimejimudele
+* [GitHub](https://github.com/sponsors/dimejimudele)
 
 
 ## How to cite
