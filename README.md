@@ -25,7 +25,7 @@ pip install pylandtemp
 
 ## Documentation
 
-The pylandtemp Python library is divided into multiple methods which provide access classes of algorithms for different computations.
+The pylandtemp Python library is divided into multiple methods which provide access to set of algorithms for different computations.
 
 
 - **Land surface temperature**
