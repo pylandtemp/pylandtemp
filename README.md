@@ -95,7 +95,6 @@ lst_image_split_window = split_window(
 |[Ugur Avdan et al. (2014)](https://www.hindawi.com/journals/js/2016/1480307/)| 'mono-window' |
 
 #### Land surface emissivity 
-`pylandtemp.emissivity(...)`
 
 | Algorithm|key|
 |----------|---|
