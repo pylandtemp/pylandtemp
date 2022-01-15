@@ -45,7 +45,7 @@ The pylandtemp Python library is divided into multiple methods which provide acc
 
 ## Example
 
-To compute land surface temperature using [Jiminez-Munoz et al. (2014)](https://ieeexplore.ieee.org/abstract/document/6784508/?casa_token=A6cR6LeSSuoAAAAA:eFg3nxZvDTJpEBhvAmOwwJxo9rWy-y3aTdnArzEfbtM1UWUbBLhG9NhmeiQstFLTY8jbsT7x) split window technique and [Ugur Avdan et al. (2014)](https://www.hindawi.com/journals/js/2016/1480307/) emissivity computation method, a single implementation  is shown below:
+To compute land surface temperature using [Jiminez-Munoz et al. (2014)](https://ieeexplore.ieee.org/abstract/document/6784508/?casa_token=A6cR6LeSSuoAAAAA:eFg3nxZvDTJpEBhvAmOwwJxo9rWy-y3aTdnArzEfbtM1UWUbBLhG9NhmeiQstFLTY8jbsT7x) split window technique and [Ugur Avdan et al. (2014)](https://www.hindawi.com/journals/js/2016/1480307/) emissivity computation method, a simple implementation  is shown below:
 
 ```python
 import numpy as np
