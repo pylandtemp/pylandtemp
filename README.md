@@ -20,6 +20,22 @@ The pylandtemp Python package is available through (PyPI)[https://pypi.org/proje
 
 ## Documentation
 
+The pylandtemp Python library is divided into multiple methods which provide access classes of algorithms for different computations.
+
+##### Land surface temperature
+- Mono-window: through the `single_window()` method
+- Split window: through the `split_window()` method
+More methodologies will be added in future releases
+
+##### Land surface emissivity
+Through the `emmissivity()` method.
+
+##### Brightness temperature
+Through the `brightness_temperature()` method.
+
+##### Normalized Difference Vegetation Index (NDVI)
+Through the `ndvi()` method.
+
 ### Supported algorithms
 
 #### Land surface temperature --- Split window 
