@@ -75,7 +75,7 @@ def cavity_effect(
 
 
 def rescale_band(
-    image: np.ndarray, mult: float = 2e-05, add: float = 0.1
+    image: np.ndarray, mult: float = 2e-05, add: float = -0.1
 ) -> np.ndarray:
     """rescales the image band
 
@@ -87,4 +87,4 @@ def rescale_band(
     Returns:
         np.ndarray: rescaled image of same size as input
     """
-    return (mult * image) + 0.1
+    return (mult * image) + add
