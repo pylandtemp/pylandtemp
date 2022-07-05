@@ -115,6 +115,7 @@ A guide to get you started with contributing will soon be made available.
 
 
 ## What's new
+- ***July 2022***: Poster presentation of this project at Scipy 2022. Link [here](https://hub-binder.mybinder.ovh/user/pylandtemp-pylandtemp-45pztpvy/doc/workspaces/auto-w/tree/tutorials)
 - ***December 2021***: version 0.0.1-alpha.1 pre-release version is out on PyPI. Find it [here](https://pypi.org/project/pylandtemp/) 
 - ***December 2021***: Implemented tutorial notebooks based on the different methods. Find them [here](https://github.com/pylandtemp/pylandtemp/tree/master/tutorials)
 - ***November 2021***: Implemented a runner for dynamic dispatch.
