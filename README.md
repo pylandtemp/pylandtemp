@@ -66,7 +66,7 @@ lst_image_split_window = split_window(
     tempImage11, 
     redImage, 
     nirImage, 
-    lst_method='jiminez_munoz', 
+    lst_method='jiminez-munoz', 
     emissivity_method='avdan',
     unit='celcius'
 )
