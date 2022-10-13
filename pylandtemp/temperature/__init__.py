@@ -4,7 +4,7 @@ from .algorithms.mono_window import MonoWindowLST
 from .algorithms.split_window.algorithms import (
     SplitWindowJiminezMunozLST,
     SplitWindowKerrLST,
-    SplitWindowMcMillinLST,
+    SplitWindowMcClainLST,
     SplitWindowPriceLST,
     SplitWindowSobrino1993LST,
 )
