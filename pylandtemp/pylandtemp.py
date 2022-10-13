@@ -140,7 +140,7 @@ def single_window(
         mask=mask,
         ndvi=ndvi_image,
     )
-    return lst_image
+    return lst_image if unit == "kelvin" else lst_image - CELCIUS_SCALER
 
 
 def emissivity(
