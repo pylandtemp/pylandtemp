@@ -82,7 +82,7 @@ lst_image_split_window = split_window(
 | [Jiminez-Munoz et al. (2014)](https://ieeexplore.ieee.org/abstract/document/6784508/?casa_token=A6cR6LeSSuoAAAAA:eFg3nxZvDTJpEBhvAmOwwJxo9rWy-y3aTdnArzEfbtM1UWUbBLhG9NhmeiQstFLTY8jbsT7x) | 'jiminez-munoz' |
 | [Sobrino et al. (1993)](https://link.springer.com/content/pdf/10.1007/BF02524225.pdf)                                                                                                      | 'sobrino-1993'  |
 | [Kerr et al. (1992)](https://www.sciencedirect.com/science/article/abs/pii/003442579290078X)                                                                                               | 'kerr'          |
-| [McClain et al. (1985)](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/JC090iC06p11587)                                                                                           | 'mc-clain'      |
+| [McMillin et al. (1975)](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/JC080i036p05113)                                                                                          | 'mc-millin'     |
 | [Price (1984)](https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/JD089iD05p07231)                                                                                                    | 'price'         |
 
 #### Land surface temperature --- Single-Channel 
