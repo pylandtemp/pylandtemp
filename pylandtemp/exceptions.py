@@ -1,11 +1,4 @@
-import numpy as np
-
-
-__all__ = [
-    "InvalidMaskError",
-    "InputShapesNotEqual",
-    "InvalidMethodRequested",
-]
+__all__ = ["assert_required_keywords_provided", "assert_temperature_unit"]
 
 
 class InvalidMaskError(Exception):
@@ -49,6 +42,6 @@ def assert_required_keywords_provided(keywords, **kwargs):
             raise KeywordArgumentError(message)
 
 
-def assert_termperture_unit():
+def assert_temperature_unit():
     if unit not in ["celcius", "kelvin"]:
         raise ValueError("Temperature unit shoould be either Kelvin or Celcius")
