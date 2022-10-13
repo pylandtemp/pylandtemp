@@ -70,7 +70,7 @@ class SplitWindowJiminezMunozLST(SplitWindowParentLST):
         lst = (
             tb_10
             + (1.387 * diff_tb)
-            + (0.183 * (diff_tb ** 2))
+            + (0.183 * (diff_tb**2))
             - 0.268
             + ((54.3 - (2.238 * self.cwv)) * (1 - mean_e))
             + ((-129.2 + (16.4 * self.cwv)) * diff_e)
@@ -129,7 +129,7 @@ class SplitWindowKerrLST(SplitWindowParentLST):
         return lst
 
 
-class SplitWindowMcClainLST(SplitWindowParentLST):
+class SplitWindowMcMillinLST(SplitWindowParentLST):
     """
     Method reference:
 
@@ -257,7 +257,7 @@ class SplitWindowSobrino1993LST(SplitWindowParentLST):
         lst = (
             tb_10
             + (1.06 * (diff_tb))
-            + (0.46 * diff_tb ** 2)
+            + (0.46 * diff_tb**2)
             + (53 * (1 - emm_10))
             - (53 * (diff_e))
         )
