@@ -7,7 +7,7 @@
 
 ## Description
 
-**pylandtemp** is a Python library that provides a simple API for computing **global land surface temperature and emissivity** from NASA's [Landsat](https://www.usgs.gov/landsat-missions) satellite images (starting from Landsat 5 to Landsat 8). It contains some implementations of Single-Channel and split window techniques. More methodologies under these groups will be added in the future.
+**pylandtemp** is a Python library that provides a simple API for computing **global land surface temperature and emissivity** from NASA's [Landsat](https://www.usgs.gov/landsat-missions) Level 1 satellite images (starting from Landsat 5 to Landsat 8).  It contains some implementations of Single-Channel and split window techniques. More methodologies under these groups will be added in the future.
 
 Additionally, it also provides multiple methods for computing land surface emissivity. It is targeted towards supporting research and science workflows in many fields including climate science, earth sciences, remote sensing, space tech, geospatial data science, environmental studies, among others.
 
