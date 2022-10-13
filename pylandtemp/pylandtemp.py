@@ -33,7 +33,6 @@ def split_window(
                         'mc-clain': McClain et al. , 1985
                         'price': Price J. C., 1984
                         'sobrino-1993': Sobrino J. A. et al, 1993
-                        'coll-caselles': Coll C. et al, 1997
 
         emissivity_method (str): provide one of the valid split window method for computing land surface emissivity.
                                          Valid methods to add include:
