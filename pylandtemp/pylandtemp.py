@@ -8,6 +8,9 @@ from .utils import compute_ndvi
 from .exceptions import *
 
 
+CELCIUS_SCALER = 273.15
+
+
 def split_window(
     landsat_band_10: np.ndarray,
     landsat_band_11: np.ndarray,
@@ -46,6 +49,8 @@ def split_window(
         np.ndarray: Land surface temperature (numpy array)
     """
 
+    assert_temperature_unit()
+
     if not (
         landsat_band_10.shape
         == landsat_band_11.shape
@@ -76,7 +81,7 @@ def split_window(
         mask=mask,
         ndvi=ndvi_image,
     )
-    return lst_image
+    return lst_image if unit == "kelvin" else lst_image - CELCIUS_SCALER
 
 
 def single_window(
@@ -113,6 +118,7 @@ def single_window(
     Returns:
         np.ndarray: Land surface temperature (numpy array)
     """
+    assert_temperature_unit()
 
     if not landsat_band_10.shape == landsat_band_5.shape == landsat_band_4.shape:
         raise InputShapesNotEqual(

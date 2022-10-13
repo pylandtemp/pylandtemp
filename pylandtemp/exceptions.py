@@ -47,3 +47,8 @@ def assert_required_keywords_provided(keywords, **kwargs):
                 f"Keyword argument {keyword} must be provided for this computation "
             )
             raise KeywordArgumentError(message)
+
+
+def assert_termperture_unit():
+    if unit not in ["celcius", "kelvin"]:
+        raise ValueError("Temperature unit shoould be either Kelvin or Celcius")
