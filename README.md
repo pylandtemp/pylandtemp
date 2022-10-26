@@ -106,9 +106,17 @@ The notebooks [here](https://github.com/pylandtemp/pylandtemp/tree/master/tutori
 
 ## Contributing
 
-All kinds of contributions are welcome --- development of enhancements, bug fixes, documentation, tutorial notebooks, new methods, new data, etc.... 
+Open source thrives on collaborations and contributions. Let us work on this package in the same spirit.
 
-A guide to get you started with contributing will soon be made available.
+If you catch any bug, find any typo or have any suggestions that will make this package better, 
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again!
+
+Fork the Project
+Create your Feature Branch (git checkout -b feature/AmazingFeature)
+Commit your Changes (git commit -m 'Add some AmazingFeature')
+Push to the Branch (git push origin feature/AmazingFeature)
+Open a Pull Request
 
 
 ## What's new
