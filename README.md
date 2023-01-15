@@ -96,7 +96,7 @@ lst_image_split_window = split_window(
 | Algorithm                                                                                                                                                                                   | key        |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
 | [Gopinadh Rongali et al. (2018)](https://www.researchgate.net/publication/327461405_Split-Window_Algorithm_for_Retrieval_of_Land_Surface_Temperature_Using_Landsat_8_Thermal_Infrared_Data) | 'gopinadh' |
-| [Ugur Avdan et al. (2014)](https://www.hindawi.com/journals/js/2016/1480307/)                                                                                                               | 'advan'    |
+| [Ugur Avdan et al. (2014)](https://www.hindawi.com/journals/js/2016/1480307/)                                                                                                               | 'avdan'    |
 | [Xiaolei Yu et al. (2014)](https://www.mdpi.com/2072-4292/6/10/9829)                                                                                                                        | 'xiaolei'  |
 
 

@@ -39,7 +39,7 @@ def split_window(
 
         emissivity_method (str): provide one of the valid split window method for computing land surface emissivity.
                                          Valid methods to add include:
-                                        'advan': Avdan Ugur et al, 2016
+                                        'avdan': Avdan Ugur et al, 2016
                                         'xiaolei':  Xiaolei Yu et al, 2014
                                         'gopinadh': Gopinadh Rongali et al 2018
 
@@ -109,7 +109,7 @@ def single_window(
 
                                         Defaults to 'avdan'.
                                          Valid methods to add include:
-                                        'advan': Avdan Ugur et al, 2016
+                                        'avdan': Avdan Ugur et al, 2016
                                         'xiaolei':  Xiaolei Yu et al, 2014
                                         'gopinadh': Gopinadh Rongali et al 2018
 
@@ -160,7 +160,7 @@ def emissivity(
         emissivity_method (str, optional): provide one of the valid split window method for computing land surface emissivity.
                                             Defaults to 'avdan'.
                                          Valid methods to add include:
-                                        'advan': Avdan Ugur et al, 2016
+                                        'avdan': Avdan Ugur et al, 2016
                                         'xiaolei':  Xiaolei Yu et al, 2014
 
     Returns:
