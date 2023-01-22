@@ -1,4 +1,5 @@
 import numpy as np
+from typing import Optional
 
 from .temperature import default_algorithms as temperature_algorithms
 from .emissivity import default_algorithms as emissivity_algorithms
@@ -181,13 +182,17 @@ def emissivity(
     return emissivity_10, emissivity_11
 
 
-def ndvi(landsat_band_5: np.ndarray, landsat_band_4: np.ndarray, mask: np.ndarray):
+def ndvi(
+    landsat_band_5: np.ndarray,
+    landsat_band_4: np.ndarray,
+    mask: Optional[np.ndarray] = None,
+):
     """Computes the NDVI given bands 4 and 5 of Landsat 8 image
 
     Args:
         landsat_band_5 (np.ndarray): Band 5 of landsat 8 image
         landsat_band_4 (np.ndarray): Band 4 of landsat 8 image
-        mask (np.ndarray[bool]): output is NaN where Mask == True
+        mask (None | np.ndarray[bool]): Defaults to None. If not None, output is NaN where Mask == True
 
     Returns:
         np.ndarray: NVDI numpy array
@@ -206,8 +211,8 @@ def ndvi(landsat_band_5: np.ndarray, landsat_band_4: np.ndarray, mask: np.ndarra
 
 def brightness_temperature(
     landsat_band_10: np.ndarray,
-    landsat_band_11: np.ndarray = None,
-    mask: np.ndarray = None,
+    landsat_band_11: Optional[np.ndarray] = None,
+    mask: Optional[np.ndarray] = None,
 ):
     """Compute brightness temperature
 
